@@ -27,7 +27,6 @@ class PuppetGhostbuster
   end
 
   def self.client 
-    Puppet.initialize_settings
     PuppetDB::Client.new({
       :server => "https://#{Puppet[:server]}:8081",
       :pem    => {
@@ -51,13 +50,16 @@ class PuppetGhostbuster
   end
 
   def initialize
+    Puppet.initialize_settings
     Dir["./**/*.pp"].each do |file|
       if c = File.readlines(file).grep(/^class\s+([^\s\(\{]+)/){$1}[0]
         class_name = c.split('::').map(&:capitalize).join('::')
-        #p "class_name=#{class_name}"
-        #p used_classes.include? class_name
         count = self.class.used_classes.select { |klass| klass == class_name }.size
-        puts "#{count} #{class_name}"
+        puts "#{count} Class[#{class_name}]"
+      elsif d = File.readlines(file).grep(/^define\s+([^\s\(\{]+)/){$1}[0]
+        define_name = d.split('::').map(&:capitalize).join('::')
+        count = self.class.client.request('resources', [:'=', 'type', define_name]).data.size
+        puts "#{count} #{define_name}"
       end
     end
   end
