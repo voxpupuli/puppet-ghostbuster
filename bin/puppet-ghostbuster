@@ -2,6 +2,6 @@
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
-require 'puppet_dead_code_cleaner'
+require 'puppet-ghostbuster'
 
-exit PuppetDeadCodeCleaner::Bin.new(ARGV).run
+exit PuppetGhostbuster::Bin.new(ARGV).run

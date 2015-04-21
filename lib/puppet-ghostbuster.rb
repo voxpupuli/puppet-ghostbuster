@@ -2,13 +2,13 @@ require 'json'
 require 'puppet'
 require 'puppetdb'
 
-require 'puppet_dead_code_cleaner/version'
-require 'puppet_dead_code_cleaner/bin'
+require 'puppet-ghostbuster/version'
+require 'puppet-ghostbuster/bin'
 
-class PuppetDeadCodeCleaner
+class PuppetGhostbuster
 
   def self.cache
-    "/var/tmp/puppet_dead_code_cleaner.cache"
+    "/var/tmp/puppet-ghostbuster.cache"
   end
 
   def self.update_cache(value)

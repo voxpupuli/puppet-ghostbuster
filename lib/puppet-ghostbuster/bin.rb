@@ -1,10 +1,10 @@
-class PuppetDeadCodeCleaner::Bin
+class PuppetGhostbuster::Bin
   def initialize(args)
     @args = args
   end
 
   def run
-    PuppetDeadCodeCleaner.new
+    PuppetGhostbuster.new
     exit 0
   end
 end

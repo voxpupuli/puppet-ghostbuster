@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 $LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
-require "puppet_dead_code_cleaner/version"
+require "puppet-ghostbuster/version"
 
 Gem::Specification.new do |s|
-  s.name        = "puppet_dead_code_cleaner"
-  s.version     = PuppetDeadCodeCleaner::VERSION
+  s.name        = "puppet-ghostbuster"
+  s.version     = PuppetGhostbuster::VERSION
   s.authors     = ["Camptocamp"]
-  s.homepage    = "http://github.com/camptocamp/puppet_dead_code_cleaner"
+  s.homepage    = "http://github.com/camptocamp/puppet-ghostbuster"
   s.summary     = "Dead code detector for Puppet"
   s.description = "Try and find dead code in Puppet receipts"
   s.licenses    = 'Apache-2.0'
