@@ -29,7 +29,7 @@ class PuppetDeadCodeCleaner
   def self.client 
     Puppet.initialize_settings
     PuppetDB::Client.new({
-      :server => Puppet[:server],
+      :server => "https://#{Puppet[:server]}:8081",
       :pem    => {
           'key'     => Puppet[:hostprivkey],
           'cert'    => Puppet[:hostcert],
