@@ -10,14 +10,14 @@ class PuppetDeadCodeCleaner
   def self.cache
     "/dev/shm/used.classes"
   end
-  
+
   def self.update_cache(value)
     File.open(cache, 'w') do |f|
       f.write(value)
     end
     value
   end
-  
+
   def self.get_cache
     if File.exists?(cache)
       JSON.parse(File.read(cache))
@@ -31,19 +31,19 @@ class PuppetDeadCodeCleaner
     PuppetDB::Client.new({
       :server => "https://#{Puppet[:server]}:8081",
       :pem    => {
-          'key'     => Puppet[:hostprivkey],
-          'cert'    => Puppet[:hostcert],
-          'ca_file' => Puppet[:localcacert],
+        'key'     => Puppet[:hostprivkey],
+        'cert'    => Puppet[:hostcert],
+        'ca_file' => Puppet[:localcacert],
       }
     })
   end
 
 
   def self.used_classes
-    return get_cache || update_cache( 
+    return get_cache || update_cache(
       client.request(
         'resources',
-          [:'=', 'type', 'Class'],
+        [:'=', 'type', 'Class'],
       ).data.map { |resource|
         resource['title']
       }
