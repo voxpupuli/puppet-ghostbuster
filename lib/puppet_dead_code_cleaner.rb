@@ -8,7 +8,7 @@ require 'puppet_dead_code_cleaner/bin'
 class PuppetDeadCodeCleaner
 
   def self.cache
-    "/dev/shm/used.classes"
+    "/var/tmp/puppet_dead_code_cleaner.cache"
   end
 
   def self.update_cache(value)
@@ -57,7 +57,7 @@ class PuppetDeadCodeCleaner
         #p "class_name=#{class_name}"
         #p used_classes.include? class_name
         count = self.class.used_classes.select { |klass| klass == class_name }.size
-        puts "#{count} : #{class_name}"
+        puts "#{count} #{class_name}"
       end
     end
   end
