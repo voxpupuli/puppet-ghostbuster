@@ -77,6 +77,26 @@ class PuppetGhostbuster
       end
       puts "#{template} not used" unless found
     end
+    Dir['./**/files/*'].each do |file|
+      next unless File.file?(file)
+      module_name, file_name = file.match(/.*\/([^\/]+)\/files\/(.+)$/).captures
+      found = false
+      Dir["."].each do |caller_file|
+        next unless File.file?(caller_file)
+        if caller_file =~ /\.pp$/
+          if match = manifest.match(/.*\/([^\/]+)\/manifests\/.+$/)
+            manifest_module_name = match.captures[0]
+            if manifest_module_name == module_name
+              found = File.readlines(caller_file).grep(/["']\$\{module_name\}\/#{file_name}["']/).size > 0
+              break if found
+            end
+          end
+        end
+        found = File.readlines(caller_file).grep(/#{module_name}\/#{file_name}/).size > 0
+        break if found
+      end
+      puts "#{file} not used" unless found
+    end
   end
 
 end
