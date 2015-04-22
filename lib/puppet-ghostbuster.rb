@@ -49,54 +49,69 @@ class PuppetGhostbuster
     )
   end
 
-  def initialize
-    Puppet.initialize_settings
+  def find_unused_classes
     Dir["./**/manifests/**/*.pp"].each do |file|
       if c = File.readlines(file).grep(/^class\s+([^\s\(\{]+)/){$1}[0]
         class_name = c.split('::').map(&:capitalize).join('::')
         count = self.class.used_classes.select { |klass| klass == class_name }.size
-        puts "#{count} Class[#{class_name}]"
-      elsif d = File.readlines(file).grep(/^define\s+([^\s\(\{]+)/){$1}[0]
-        define_name = d.split('::').map(&:capitalize).join('::')
-        count = self.class.client.request('resources', [:'=', 'type', define_name]).data.size
-        puts "#{count} #{define_name}"
+        puts "Class #{class_name} not used" if count == 0
       end
     end
+  end
+
+  def find_unused_defines
+    Dir["./**/manifests/**/*.pp"].each do |file|
+      if d = File.readlines(file).grep(/^define\s+([^\s\(\{]+)/){$1}[0]
+        define_name = d.split('::').map(&:capitalize).join('::')
+        count = self.class.client.request('resources', [:'=', 'type', define_name]).data.size
+        puts "Define #{define_name} not used" if count == 0
+      end
+    end
+  end
+
+  def find_unused_templates
     Dir['./**/templates/*'].each do |template|
       next unless File.file?(template)
       module_name, template_name = template.match(/.*\/([^\/]+)\/templates\/(.+)$/).captures
-      found = false
+      count = 0
       Dir["./**/manifests/**/*.pp"].each do |manifest|
         if match = manifest.match(/.*\/([^\/]+)\/manifests\/.+$/)
           manifest_module_name = match.captures[0]
-          found = File.readlines(manifest).grep(/["']\$\{module_name\}\/#{template_name}["']/).size > 0 if manifest_module_name == module_name
-          break if found
+          count += File.readlines(manifest).grep(/["']\$\{module_name\}\/#{template_name}["']/).size if manifest_module_name == module_name
         end
-        found = File.readlines(manifest).grep(/["']#{module_name}\/#{template_name}["']/).size > 0
-        break if found
+        count += File.readlines(manifest).grep(/["']#{module_name}\/#{template_name}["']/).size
       end
-      puts "#{template} not used" unless found
+      puts "Template #{template} not used" if count == 0
     end
+  end
+
+  def find_unused_files
     Dir['./**/files/*'].each do |file|
       next unless File.file?(file)
       module_name, file_name = file.match(/.*\/([^\/]+)\/files\/(.+)$/).captures
-      found = false
+      count = 0
       Dir["."].each do |caller_file|
         next unless File.file?(caller_file)
         if caller_file =~ /\.pp$/
           if match = manifest.match(/.*\/([^\/]+)\/manifests\/.+$/)
             manifest_module_name = match.captures[0]
             if manifest_module_name == module_name
-              found = File.readlines(caller_file).grep(/["']\$\{module_name\}\/#{file_name}["']/).size > 0
-              break if found
+              count += File.readlines(caller_file).grep(/["']\$\{module_name\}\/#{file_name}["']/).size
             end
           end
         end
-        found = File.readlines(caller_file).grep(/#{module_name}\/#{file_name}/).size > 0
-        break if found
+        count += File.readlines(caller_file).grep(/#{module_name}\/#{file_name}/).size
       end
-      puts "#{file} not used" unless found
+      puts "File #{file} not used" if count == 0
     end
+  end
+
+  def initialize
+    Puppet.initialize_settings
+    find_unused_classes
+    find_unused_defines
+    find_unused_templates
+    find_unused_files
   end
 
 end
