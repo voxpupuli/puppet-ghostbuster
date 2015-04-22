@@ -90,17 +90,20 @@ class PuppetGhostbuster
       next unless File.file?(file)
       module_name, file_name = file.match(/.*\/([^\/]+)\/files\/(.+)$/).captures
       count = 0
-      Dir["."].each do |caller_file|
+      Dir['./**/*'].each do |caller_file|
         next unless File.file?(caller_file)
-        if caller_file =~ /\.pp$/
-          if match = manifest.match(/.*\/([^\/]+)\/manifests\/.+$/)
-            manifest_module_name = match.captures[0]
-            if manifest_module_name == module_name
-              count += File.readlines(caller_file).grep(/["']\$\{module_name\}\/#{file_name}["']/).size
+        begin
+          if caller_file =~ /\.pp$/
+            if match = caller_file.match(/.*\/([^\/]+)\/manifests\/.+$/)
+              manifest_module_name = match.captures[0]
+              if manifest_module_name == module_name
+                count += File.readlines(caller_file).grep(/["']\$\{module_name\}\/#{file_name}["']/).size
+              end
             end
           end
+          count += File.readlines(caller_file).grep(/#{module_name}\/#{file_name}/).size
+        rescue ArgumentError
         end
-        count += File.readlines(caller_file).grep(/#{module_name}\/#{file_name}/).size
       end
       puts "File #{file} not used" if count == 0
     end
