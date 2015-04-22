@@ -62,6 +62,21 @@ class PuppetGhostbuster
         puts "#{count} #{define_name}"
       end
     end
+    Dir['./**/templates/*'].each do |template|
+      next unless File.file?(template)
+      module_name, template_name = template.match(/.*\/([^\/]+)\/templates\/(.+)$/).captures
+      found = false
+      Dir["./**/manifests/**/*.pp"].each do |manifest|
+        if match = manifest.match(/.*\/([^\/]+)\/manifests\/.+$/)
+          manifest_module_name = match.captures[0]
+          found = File.readlines(manifest).grep(/["']\$\{module_name\}\/#{template_name}["']/).size > 0 if manifest_module_name == module_name
+          break if found
+        end
+        found = File.readlines(manifest).grep(/["']#{module_name}\/#{template_name}["']/).size > 0
+        break if found
+      end
+      puts "#{template} not used" unless found
+    end
   end
 
 end
