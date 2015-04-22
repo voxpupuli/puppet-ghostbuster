@@ -51,7 +51,7 @@ class PuppetGhostbuster
 
   def initialize
     Puppet.initialize_settings
-    Dir["./**/*.pp"].each do |file|
+    Dir["./**/manifests/**/*.pp"].each do |file|
       if c = File.readlines(file).grep(/^class\s+([^\s\(\{]+)/){$1}[0]
         class_name = c.split('::').map(&:capitalize).join('::')
         count = self.class.used_classes.select { |klass| klass == class_name }.size
