@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.1.2](https://github.com/camptocamp/puppet-ghostbuster/releases/tag/0.1.3) (2015-04-23)
+
+- Add --log-level option and debug
+
 ## [0.1.2](https://github.com/camptocamp/puppet-ghostbuster/releases/tag/0.1.2) (2015-04-23)
 
 **Fixed bugs:**
