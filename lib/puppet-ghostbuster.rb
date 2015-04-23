@@ -90,6 +90,7 @@ class PuppetGhostbuster
 
   def find_unused_defines
     manifests.each do |file|
+      next if File.symlink?(file)
       if d = File.readlines(file).grep(/^define\s+([^\s\(\{]+)/){$1}[0]
         define_name = d.split('::').map(&:capitalize).join('::')
         count = self.class.client.request('resources', [:'=', 'type', define_name]).data.size
@@ -104,6 +105,7 @@ class PuppetGhostbuster
       module_name, template_name = template.match(/.*\/([^\/]+)\/templates\/(.+)$/).captures
       count = 0
       manifests.each do |manifest|
+        next if File.symlink?(manifest)
         if match = manifest.match(/.*\/([^\/]+)\/manifests\/.+$/)
           manifest_module_name = match.captures[0]
           count += File.readlines(manifest).grep(/["']\$\{module_name\}\/#{template_name}["']/).size if manifest_module_name == module_name
