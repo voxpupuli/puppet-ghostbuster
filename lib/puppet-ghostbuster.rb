@@ -31,7 +31,6 @@ class PuppetGhostbuster
     self.class.configuration
   end
 
-
   def self.puppetdbserverfilename
     return configuration.puppetdbserverurl.gsub(/[:\/]/,'_')
   end
@@ -55,7 +54,8 @@ class PuppetGhostbuster
     end
   end
 
-  def self.client 
+  def self.client
+    @@logger.debug "Connecting to puppet DB #{configuration.puppetdbserverurl}"
     PuppetDB::Client.new({
       :server => configuration.puppetdbserverurl,
       :pem    => {
@@ -78,8 +78,13 @@ class PuppetGhostbuster
   end
 
   def find_unused_classes
+    @@logger.info 'Now trying to find unused classes'
     manifests.each do |file|
-      next if File.symlink?(file)
+      @@logger.debug "  file #{file}."
+      if File.symlink?(file)
+        @@logger.warn "  Skipping symlink #{file}"
+        next
+      end
       if c = File.readlines(file).grep(/^class\s+([^\s\(\{]+)/){$1}[0]
         class_name = c.split('::').map(&:capitalize).join('::')
         count = self.class.used_classes.select { |klass| klass == class_name }.size
@@ -89,8 +94,12 @@ class PuppetGhostbuster
   end
 
   def find_unused_defines
+    @@logger.info 'Now trying to find unused defines'
     manifests.each do |file|
-      next if File.symlink?(file)
+      if File.symlink?(file)
+        @@logger.warn "  Skipping symlink #{file}"
+        next
+      end
       if d = File.readlines(file).grep(/^define\s+([^\s\(\{]+)/){$1}[0]
         define_name = d.split('::').map(&:capitalize).join('::')
         count = self.class.client.request('resources', [:'=', 'type', define_name]).data.size
@@ -100,12 +109,16 @@ class PuppetGhostbuster
   end
 
   def find_unused_templates
+    @@logger.info 'Now trying to find unused templates'
     templates.each do |template|
       next unless File.file?(template)
       module_name, template_name = template.match(/.*\/([^\/]+)\/templates\/(.+)$/).captures
       count = 0
       manifests.each do |manifest|
-        next if File.symlink?(manifest)
+        if File.symlink?(manifest)
+          @@logger.warn "  Skipping symlink #{manifest}"
+          next
+        end
         if match = manifest.match(/.*\/([^\/]+)\/manifests\/.+$/)
           manifest_module_name = match.captures[0]
           count += File.readlines(manifest).grep(/["']\$\{module_name\}\/#{template_name}["']/).size if manifest_module_name == module_name
@@ -117,6 +130,7 @@ class PuppetGhostbuster
   end
 
   def find_unused_files
+    @@logger.info 'Now trying to find unused files'
     files.each do |file|
       next unless File.file?(file)
       module_name, file_name = file.match(/.*\/([^\/]+)\/files\/(.+)$/).captures
@@ -142,6 +156,10 @@ class PuppetGhostbuster
 
   def initialize(path = '.')
     self.path = path
+    @@logger = Logger.new(STDERR).tap do |log|
+      log.progname = 'PuppetGhostbuster'
+      log.level=PuppetGhostbuster.configuration.loglevel
+    end
   end
 
   def run

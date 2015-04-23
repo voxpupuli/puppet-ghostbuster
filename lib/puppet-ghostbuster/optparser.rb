@@ -29,12 +29,17 @@ class PuppetGhostbuster::OptParser
         opts.load(file)
       end
 
-      opts.on('--error-level LEVEL', [:all, :warning, :error],
-              'The level of error to return (warning, error or all).') do |el|
-        PuppetGhostbuster.configuration.error_level = el
+      opts.on('--log-level LEVEL', [:debug, :info, :warn, :error],
+              'The level of verbosity (debug, info, warn or error)') do |loglevel|
+        PuppetGhostbuster.configuration.loglevel=Logger::DEBUG if loglevel==:debug
+        PuppetGhostbuster.configuration.loglevel=Logger::INFO  if loglevel==:info
+        PuppetGhostbuster.configuration.loglevel=Logger::WARN  if loglevel==:warn
+        PuppetGhostbuster.configuration.loglevel=Logger::ERROR if loglevel==:error
       end
 
-      opts.on('-s', '--puppetdburl SERVER', 'puppet db server url to connect to.') do |s|
+      opts.on('-s', '--puppetdburl SERVER',
+              'puppet db server url to connect to.',
+              'Defaults to the puppet server found in puppet configuration') do |s|
         PuppetGhostbuster.configuration.puppetdbserverurl = s
       end
 
