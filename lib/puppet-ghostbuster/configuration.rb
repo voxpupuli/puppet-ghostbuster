@@ -4,7 +4,7 @@ class PuppetGhostbuster
   class Configuration
 
     def initialize
-      Puppet.initialize_settings 
+      Puppet.initialize_settings
     end
 
     # Public: Catch situations where options are being set for the first time
@@ -86,6 +86,7 @@ class PuppetGhostbuster
     # Returns nothing.
     def defaults
       settings.clear
+      self.loglevel = Logger::INFO
       self.puppetdbserverurl = "https://#{Puppet[:server]}:8081"
       self.hostprivkey = Puppet[:hostprivkey]
       self.hostcert    = Puppet[:hostcert]
