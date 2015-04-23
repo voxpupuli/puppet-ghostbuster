@@ -19,7 +19,7 @@ class PuppetGhostbuster::Bin
       puts "puppet-ghostbuster #{PuppetGhostbuster::VERSION}"
       return 0
     end
-   
+
     if @args[0].nil?
       PuppetGhostbuster.new().run
     else
