@@ -12,7 +12,7 @@ Classes used 0 time should be removed.
 Usage
 -----
 
-This gem needs enough permissions to read puppet configuration files and private key.
+If you want to read default options and private key from puppet configuration, this gem needs to have root (puppet) permissions.
 ```
 sudo bundle exec puppet-ghostbuster
 ```
