@@ -55,6 +55,12 @@ class PuppetGhostbuster
   end
 
   def self.client
+    unless configuration.preconnect.nil?
+      @@logger.debug "Executing preconnect command #{configuration.preconnect}"
+      success = system(configuration.preconnect)
+      @@logger.error "preconnect command failed" unless success
+      configuration.preconnect = nil # so that we launch preconnect only once.
+    end
     @@logger.debug "Connecting to puppet DB #{configuration.puppetdbserverurl}"
     PuppetDB::Client.new({
       :server => configuration.puppetdbserverurl,
