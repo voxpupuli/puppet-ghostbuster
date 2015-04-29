@@ -1,12 +1,14 @@
 puppet-ghostbuster
 ==================
 
+When you have dead puppet code hanging around ...
+*Who you gonna call ?*
+
 [![Gem Version](https://img.shields.io/gem/v/puppet-ghostbuster.svg)](https://rubygems.org/gems/puppet-ghostbuster)
 [![Gem Downloads](https://img.shields.io/gem/dt/puppet-ghostbuster.svg)](https://rubygems.org/gems/puppet-ghostbuster)
 
-Helps puppet users to find dead code by displaying how many time each class is used.
 
-Classes used 0 time should be removed.
+This gems helps puppet users to find dead code by displaying unused classes, defined resources, template and files.
 
 
 Usage
@@ -17,22 +19,37 @@ If you want to read default options and private key from puppet configuration, t
 sudo bundle exec puppet-ghostbuster
 ```
 
+You can add preconnect command with ``-p`` and server url with ``-s``.
+
+``-h`` or ``--help`` for full options.
+
 Example output
 --------------
 ```
-$ bundle exec puppet-ghostbuster
-4 Profiles_c2c::Mw::Lamp
-0 Profiles_c2c::Mw::Lighttpd
-2 Profiles_c2c::Mw::Mysql
-242 Profiles_c2c::Os::Base_debian
-132 Profiles_c2c::Os::Monitoring
-[...]
+$ bundle exec puppet-ghostbuster -s https://puppetdburl:8081
+Class Foo::Install not used
+Class Foo::Service not used
+Class Foo not used
+...
+Define Bar::Baz not used
+...
+Template ./modulename/templates/foo.erb not used
+Template ./modulename/templates/bar.erb not used
+Template ./modulename/templates/baz.erb not used
+...
+File ./foo/files/bar.txt not used
+File ./foo/files/baz.txt not used
+...
 ```
-Wow, we don't seems to use Lightty anymore. Let's do some cleanup.
 
 How It Works
 ------------
-  1. It search puppet code recursively starting from current directory
+To find unused classes:
+  1. It search puppet code recursively starting (by default) from current directory.
   2. For each .pp file found, it extract the class name
   3. Query puppetdb (using cache) to find matching class in catalogs
   4. Display the number of class, followed by the class name.
+
+Same method applies to find unused defines.
+
+To find template and files, it has to loop twice, so this step can be longer.
