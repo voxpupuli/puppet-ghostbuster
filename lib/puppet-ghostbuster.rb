@@ -12,15 +12,15 @@ class PuppetGhostbuster
   attr_accessor :path
 
   def manifests
-    Dir["#{path}/**/manifests/*.pp"]
+    Dir["#{path}/**/manifests/**/*.pp"]
   end
 
   def templates
-    Dir["#{path}/**/templates/*"]
+    Dir["#{path}/**/templates/**/*"]
   end
 
   def files
-    Dir["#{path}/**/files/*"]
+    Dir["#{path}/**/files/**/*"]
   end
 
   def self.configuration
