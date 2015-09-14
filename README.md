@@ -1,10 +1,10 @@
 puppet-ghostbuster
 ==================
 
-[![Build Status](https://img.shields.io/travis/camptocamp/puppetfile-updater.svg)](https://travis-ci.org/camptocamp/puppetfile-updater)
-[![Gem Version](https://img.shields.io/gem/v/puppetfile-updater.svg)](https://rubygems.org/gems/puppetfile-updater)
-[![Gem Downloads](https://img.shields.io/gem/dt/puppetfile-updater.svg)](https://rubygems.org/gems/puppetfile-updater)
-[![Gemnasium](https://img.shields.io/gemnasium/camptocamp/puppetfile-updater.svg)](https://gemnasium.com/camptocamp/puppetfile-updater)
+[![Build Status](https://img.shields.io/travis/camptocamp/puppet-ghostbuster.svg)](https://travis-ci.org/camptocamp/puppet-ghostbuster)
+[![Gem Version](https://img.shields.io/gem/v/puppet-ghostbuster.svg)](https://rubygems.org/gems/puppet-ghostbuster)
+[![Gem Downloads](https://img.shields.io/gem/dt/puppet-ghostbuster.svg)](https://rubygems.org/gems/puppet-ghostbuster)
+[![Gemnasium](https://img.shields.io/gemnasium/camptocamp/puppet-ghostbuster.svg)](https://gemnasium.com/camptocamp/puppet-ghostbuster)
 
 When you have dead puppet code hanging around ...
 *Who you gonna call ?*
