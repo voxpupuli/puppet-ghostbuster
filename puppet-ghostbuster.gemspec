@@ -15,6 +15,10 @@ Gem::Specification.new do |s|
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
+  s.add_development_dependency 'coveralls'
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'github_changelog_generator'
   s.add_runtime_dependency 'json'
   s.add_runtime_dependency 'puppet'
   s.add_runtime_dependency 'puppetdb-ruby'
