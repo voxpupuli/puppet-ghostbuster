@@ -1,0 +1,17 @@
+language: ruby
+sudo: false
+cache: bundler
+rvm:
+- 2.1.5
+matrix:
+  fast_finish: true
+deploy:
+  provider: rubygems
+  api_key:
+    secure: HR9PryqDCSGRJlhjdZHpNLMV5FD6oiJ46WzOebYeIGjZRH64vvV2XmxarH/UZpQLRC1x8V0SJV7ju1f727n3Mp2D36kVLxGkn3QbKL4QFDXdRfCKF+jmckzYM5aAxMl/bbNXegdcNOC0eUODzXyMQffd1c1wvlvxSGRCKBD05ug=
+  gem: puppet-ghostbuster
+  on:
+    tags: true
+    repo: camptocamp/puppet-ghostbuster
+notifications:
+  email: false
