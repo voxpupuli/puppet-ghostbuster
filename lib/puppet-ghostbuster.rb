@@ -16,7 +16,7 @@ class PuppetGhostbuster
     if File.exist?(ignorefile) then
       ignorelist = File.readlines(ignorefile).each {|l| l.chomp!}
       ignorelist.each do |ignorerule|
-        filelist.reject! { |item| item =~ /^#{ignorerule}/ }
+        filelist.reject! { |item| item =~ /^#{path}\/#{ignorerule}/ }
       end
     end
     filelist
