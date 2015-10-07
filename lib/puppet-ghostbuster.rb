@@ -11,16 +11,27 @@ class PuppetGhostbuster
 
   attr_accessor :path
 
+  def exclude(filelist)
+    ignorefile = "#{path}/.ghostbusterignore"
+    if File.exist?(ignorefile) then
+      ignorelist = File.readlines(ignorefile).each {|l| l.chomp!}
+      ignorelist.each do |ignorerule|
+        filelist.reject! { |item| item =~ /^#{ignorerule}/ }
+      end
+    end
+    filelist
+  end
+
   def manifests
-    Dir["#{path}/**/manifests/**/*.pp"]
+    exclude Dir["#{path}/**/manifests/**/*.pp"]
   end
 
   def templates
-    Dir["#{path}/**/templates/**/*"]
+    exclude Dir["#{path}/**/templates/**/*"]
   end
 
   def files
-    Dir["#{path}/**/files/**/*"]
+    exclude Dir["#{path}/**/files/**/*"]
   end
 
   def self.configuration
