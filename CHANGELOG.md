@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.2.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.2.0) (2015-10-07)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.1.4...0.2.0)
+
+**Implemented enhancements:**
+
+- Implement a .ghostbusterignore file [\#11](https://github.com/camptocamp/puppet-ghostbuster/pull/11) ([roidelapluie](https://github.com/roidelapluie))
+
 ## [0.1.4](https://rubygems.org/gems/puppet-ghostbuster/versions/0.1.4) (2015-09-14)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.1.3...0.1.4)
 
