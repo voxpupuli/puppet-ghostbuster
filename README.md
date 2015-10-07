@@ -55,3 +55,18 @@ To find unused classes:
 Same method applies to find unused defines.
 
 To find template and files, it has to loop twice, so this step can be longer.
+
+.ghostbusterignore
+------------------
+
+Puppet-ghostbuster supports `.ghostbusterignore` files with a list of path that
+will be excluded from the dead code detection. Useful for upstream modules where
+you are are not using everything.
+
+Example of `.ghostbusterignore` file:
+
+```
+modules/apache
+modules/mysql
+modules/mcollective/templates
+```
