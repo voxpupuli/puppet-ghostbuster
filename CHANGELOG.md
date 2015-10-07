@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.2.1](https://rubygems.org/gems/puppet-ghostbuster/versions/0.2.1) (2015-10-07)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.2.0...0.2.1)
+
+**Fixed bugs:**
+
+- Add documentation and allow relative paths in .ghostbusterignore file [\#12](https://github.com/camptocamp/puppet-ghostbuster/pull/12) ([roidelapluie](https://github.com/roidelapluie))
+
 ## [0.2.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.2.0) (2015-10-07)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.1.4...0.2.0)
 
