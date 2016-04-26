@@ -12,6 +12,7 @@ When you have dead puppet code hanging around ...
 
 This gems helps puppet users to find dead code by displaying unused classes, defined resources, template and files.
 
+This gems only support PuppetDB APi v4 (PuppetDB 3+)
 
 Usage
 -----
