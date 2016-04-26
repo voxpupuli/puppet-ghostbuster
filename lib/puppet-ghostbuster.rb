@@ -68,13 +68,13 @@ class PuppetGhostbuster
   def self.client
     @@logger.debug "Connecting to puppet DB #{configuration.puppetdbserverurl}"
     PuppetDB::Client.new({
-      :server => configuration.puppetdbserverurl,
+      :server => "#{configuration.puppetdbserverurl}/pdb/query",
       :pem    => {
         'key'     => configuration.hostprivkey,
         'cert'    => configuration.hostcert,
         'ca_file' => configuration.localcacert,
       }
-    })
+    }, 4)
   end
 
   def self.used_classes
