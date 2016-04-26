@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.3.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.3.0) (2016-04-26)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.2.1...0.3.0)
+
+**Fixed bugs:**
+
+- PuppetDB 3+ support [\#16](https://github.com/camptocamp/puppet-ghostbuster/pull/16) ([daenney](https://github.com/daenney))
+
 ## [0.2.1](https://rubygems.org/gems/puppet-ghostbuster/versions/0.2.1) (2015-10-07)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.2.0...0.2.1)
 
