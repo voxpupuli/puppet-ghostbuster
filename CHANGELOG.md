@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.4.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.4.0) (2016-04-28)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.3.0...0.4.0)
+
+**Implemented enhancements:**
+
+- Output to JSON[\#17](https://github.com/camptocamp/puppet-ghostbuster/pull/17) ([mcanevet](https://github.com/mcanevet))
+
 ## [0.3.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.3.0) (2016-04-26)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.2.1...0.3.0)
 
