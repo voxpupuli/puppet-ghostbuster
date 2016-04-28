@@ -29,20 +29,45 @@ You can add preconnect command with ``-p`` and server url with ``-s``.
 Example output
 --------------
 ```
-$ bundle exec puppet-ghostbuster -s https://puppetdburl:8081
-Class Foo::Install not used
-Class Foo::Service not used
-Class Foo not used
-...
-Define Bar::Baz not used
-...
-Template ./modulename/templates/foo.erb not used
-Template ./modulename/templates/bar.erb not used
-Template ./modulename/templates/baz.erb not used
-...
-File ./foo/files/bar.txt not used
-File ./foo/files/baz.txt not used
-...
+$ puppet-ghostbuster -s https://puppetdburl:8081 | jsonpp
+[
+  {
+    "title": "[GhostBuster] Class Foo::Install seems unused",
+    "body": "./modules/foo/manifests/install.pp"
+  },
+  {
+    "title": "[GhostBuster] Class Foo::Service seems unused",
+    "body": "./modules/foo/manifests/service.pp"
+  },
+  {
+    "title": "[GhostBuster] Class Foo seems unused",
+    "body": "./modules/foo/manifests/init.pp"
+  },
+  {
+    "title": "[GhostBuster] Define Bar:Baz seems unused",
+    "body": "./modules/bar/manifests/baz.pp"
+  },
+  {
+    "title": "[GhostBuster] Template modulename/foo.erb seems unused",
+    "body": "./modules/modulename/templates/foo.erb"
+  },
+  {
+    "title": "[GhostBuster] Template modulename/bar.erb seems unused",
+    "body": "./modules/modulename/templates/bar.erb"
+  },
+  {
+    "title": "[GhostBuster] Template modulename/baz.erb seems unused",
+    "body": "./modules/modulename/templates/baz.erb"
+  },
+  {
+    "title": "[GhostBuster] File foo/bar.txt seems unused",
+    "body": "./modules/foo/files/bar.txt"
+  },
+  {
+    "title": "[GhostBuster] File foo/baz.txt seems unused",
+    "body": "./modules/foo/files/baz.txt"
+  }
+]
 ```
 
 How It Works
