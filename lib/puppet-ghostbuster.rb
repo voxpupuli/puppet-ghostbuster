@@ -10,6 +10,7 @@ require 'puppet-ghostbuster/configuration'
 class PuppetGhostbuster
 
   attr_accessor :path
+  @@issues = []
 
   def exclude(filelist)
     ignorefile = "#{path}/.ghostbusterignore"
@@ -99,7 +100,7 @@ class PuppetGhostbuster
       if c = File.readlines(file).grep(/^class\s+([^\s\(\{]+)/){$1}[0]
         class_name = c.split('::').map(&:capitalize).join('::')
         count = self.class.used_classes.select { |klass| klass == class_name }.size
-        puts "Class #{class_name} not used" if count == 0
+        @@issues << { :title => "[GhostBuster] Class #{class_name} seems unused", :body => file } if count == 0
       end
     end
   end
@@ -114,7 +115,7 @@ class PuppetGhostbuster
       if d = File.readlines(file).grep(/^define\s+([^\s\(\{]+)/){$1}[0]
         define_name = d.split('::').map(&:capitalize).join('::')
         count = self.class.client.request('resources', [:'=', 'type', define_name]).data.size
-        puts "Define #{define_name} not used" if count == 0
+        @@issues << { :title => "[GhostBuster] Define #{define_name} seems unused", :body => file } if count == 0
       end
     end
   end
@@ -136,7 +137,7 @@ class PuppetGhostbuster
         end
         count += File.readlines(manifest).grep(/["']#{module_name}\/#{template_name}["']/).size
       end
-      puts "Template #{template} not used" if count == 0
+      @@issues << { :title => "[GhostBuster] Template #{module_name}/#{template_name} seems unused", :body => template } if count == 0
     end
   end
 
@@ -161,7 +162,7 @@ class PuppetGhostbuster
         rescue ArgumentError
         end
       end
-      puts "File #{file} not used" if count == 0
+      @@issues << { :title => "[GhostBuster] File #{module_name}/#{file_name} seems unused", :body => file } if count == 0
     end
   end
 
@@ -178,6 +179,7 @@ class PuppetGhostbuster
     find_unused_defines
     find_unused_templates
     find_unused_files
+    puts @@issues.to_json
   end
 
 end
