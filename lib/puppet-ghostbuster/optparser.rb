@@ -43,6 +43,13 @@ class PuppetGhostbuster::OptParser
         PuppetGhostbuster.configuration.puppetdbserverurl = s
       end
 
+      opts.on('-p', '--preconnect COMMAND',
+              'Command to spawn before attempting connection to puppet db.',
+              'Example: --preconnect \'ssh -f -L1234:localhost:8080 puppetdb.fqdn sleep 30\' --puppetdburl http://localhost:1234') do |cmd|
+              'Hint: Be sure to set a sleep delay long enough for all puppet db queries to happen.'
+        PuppetGhostbuster.configuration.preconnect = cmd
+      end
+
       opts.on('--key FILE', 'Load private key from the given file.') do |file|
         PuppetGhostbuster.configuration.hostprivkey
       end
