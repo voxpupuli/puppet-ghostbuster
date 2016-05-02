@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.4.1](https://rubygems.org/gems/puppet-ghostbuster/versions/0.4.1) (2016-05-02)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.4.0...0.4.1)
+
+**Fixed bugs:**
+
+- Fix unused files detection[\#20](https://github.com/camptocamp/puppet-ghostbuster/pull/20) ([mcanevet](https://github.com/mcanevet))
+
 ## [0.4.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.4.0) (2016-04-28)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.3.0...0.4.0)
 
