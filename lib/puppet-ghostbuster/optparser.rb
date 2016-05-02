@@ -43,16 +43,16 @@ class PuppetGhostbuster::OptParser
         PuppetGhostbuster.configuration.puppetdbserverurl = s
       end
 
-      opts.on('--key FILE', 'Load private key from the given file.') do |file|
-        PuppetGhostbuster.configuration.hostprivkey
+      opts.on('--key FILE', 'Load private key from the given file.') do |key|
+        PuppetGhostbuster.configuration.hostprivkey = key
       end
 
-      opts.on('--cert FILE', 'Load cert from the given file.') do |file|
-        PuppetGhostbuster.configuration.hostcert
+      opts.on('--cert FILE', 'Load cert from the given file.') do |cert|
+        PuppetGhostbuster.configuration.hostcert = cert
       end
 
-      opts.on('--ca FILE', 'Load local ca cert from the given file.') do |file|
-        PuppetGhostbuster.configuration.localcacert
+      opts.on('--ca FILE', 'Load local ca cert from the given file.') do |ca|
+        PuppetGhostbuster.configuration.localcacert = ca
       end
 
       opts.load('/etc/puppet-ghostbuster.rc')
