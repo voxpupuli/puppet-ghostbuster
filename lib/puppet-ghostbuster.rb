@@ -146,8 +146,9 @@ class PuppetGhostbuster
     files.each do |file|
       next unless File.file?(file)
       module_name, file_name = file.match(/.*\/([^\/]+)\/files\/(.+)$/).captures
-      count = 0
+      found = false
       manifests.each do |manifest|
+        break if found
         if File.symlink?(manifest)
           @@logger.warn "  Skipping symlink #{manifest}"
           next
@@ -155,12 +156,12 @@ class PuppetGhostbuster
         if match = manifest.match(/.*\/([^\/]+)\/manifests\/.+$/)
           manifest_module_name = match.captures[0]
           if manifest_module_name == module_name
-            count += File.readlines(manifest).grep(/["']\$\{module_name\}\/#{file_name}["']/).size
+            found = true if File.readlines(manifest).grep(/["']\$\{module_name\}\/#{file_name}["']/).size > 0
           end
         end
-        count += File.readlines(manifest).grep(/#{module_name}\/#{file_name}/).size
+        found = true if File.readlines(manifest).grep(/#{module_name}\/#{file_name}/).size > 0
       end
-      @@issues << { :title => "[GhostBuster] File #{module_name}/#{file_name} seems unused", :body => file } if count == 0
+      @@issues << { :title => "[GhostBuster] File #{module_name}/#{file_name} seems unused", :body => file } if found
     end
   end
 
