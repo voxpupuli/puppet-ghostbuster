@@ -146,21 +146,40 @@ class PuppetGhostbuster
     files.each do |file|
       next unless File.file?(file)
       module_name, file_name = file.match(/.*\/([^\/]+)\/files\/(.+)$/).captures
-      count = 0
+      found = false
+
+      found = true if self.class.client.request('resources', [:'=', ['parameter', 'source'], "^puppet:///modules/#{module_name}/#{file_name}$"],).data.size > 0
+
+      dir_name = File.dirname(file_name)
+      while dir_name != '.' do
+        found = true if self.class.client.request(
+          'resources',
+          [:'and',
+           [:'=', ['parameter', 'source'], "^puppet:///modules/#{module_name}/#{dir_name}/?$"],
+           [:'=', ['parameter', 'recurse'], true],
+        ],
+        ).data.size > 0
+        dir_name = File.dirname(dir_name)
+      end
+
       manifests.each do |manifest|
         if File.symlink?(manifest)
           @@logger.warn "  Skipping symlink #{manifest}"
           next
         end
+
         if match = manifest.match(/.*\/([^\/]+)\/manifests\/.+$/)
           manifest_module_name = match.captures[0]
           if manifest_module_name == module_name
-            count += File.readlines(manifest).grep(/["']\$\{module_name\}\/#{file_name}["']/).size
+            found = true if File.readlines(manifest).grep(/["']\$\{module_name\}\/#{file_name}["']/).size > 0
+            break if found
           end
         end
-        count += File.readlines(manifest).grep(/#{module_name}\/#{file_name}/).size
+        found = true if File.readlines(manifest).grep(/#{module_name}\/#{file_name}/).size > 0
+        break if found
       end
-      @@issues << { :title => "[GhostBuster] File #{module_name}/#{file_name} seems unused", :body => file } if count == 0
+
+      @@issues << { :title => "[GhostBuster] File #{module_name}/#{file_name} seems unused", :body => file } if found
     end
   end
 
