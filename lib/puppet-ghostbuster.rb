@@ -148,15 +148,18 @@ class PuppetGhostbuster
       module_name, file_name = file.match(/.*\/([^\/]+)\/files\/(.+)$/).captures
       found = false
 
-      found = true if self.class.client.request('resources', [:'=', ['parameter', 'source'], "^puppet:///modules/#{module_name}/#{file_name}$"],).data.size > 0
+      found = true if self.class.client.request('resources', [:'=', ['parameter', 'source'], "puppet:///modules/#{module_name}/#{file_name}"],).data.size > 0
 
       dir_name = File.dirname(file_name)
       while dir_name != '.' do
         found = true if self.class.client.request(
           'resources',
           [:'and',
-           [:'=', ['parameter', 'source'], "^puppet:///modules/#{module_name}/#{dir_name}/?$"],
-           [:'=', ['parameter', 'recurse'], true],
+            [:'or',
+              [:'=', ['parameter', 'source'], "puppet:///modules/#{module_name}/#{dir_name}"],
+              [:'=', ['parameter', 'source'], "puppet:///modules/#{module_name}/#{dir_name}/"],
+            ],
+            [:'=', ['parameter', 'recurse'], true],
         ],
         ).data.size > 0
         dir_name = File.dirname(dir_name)
