@@ -179,7 +179,7 @@ class PuppetGhostbuster
         break if found
       end
 
-      @@issues << { :title => "[GhostBuster] File #{module_name}/#{file_name} seems unused", :body => file } if found
+      @@issues << { :title => "[GhostBuster] File #{module_name}/#{file_name} seems unused", :body => file } unless found
     end
   end
 
