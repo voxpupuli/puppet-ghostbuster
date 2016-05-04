@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.4.3](https://rubygems.org/gems/puppet-ghostbuster/versions/0.4.3) (2016-05-04)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.4.2...0.4.3)
+
+**Fixed bugs:**
+
+- Less false positive
+
 ## [0.4.2](https://rubygems.org/gems/puppet-ghostbuster/versions/0.4.2) (2016-05-02)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.4.1...0.4.2)
 
