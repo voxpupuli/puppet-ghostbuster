@@ -10,3 +10,5 @@ GitHubChangelogGenerator::RakeTask.new :changelog do |config|
   config.future_release = PuppetGhostbuster::VERSION
   config.release_url = "https://rubygems.org/gems/puppet-ghostbuster/versions/%s"
 end
+
+task :default => :spec
