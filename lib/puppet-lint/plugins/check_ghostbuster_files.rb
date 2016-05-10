@@ -1,4 +1,4 @@
-require 'puppet-ghostbuster'
+require 'puppet-ghostbuster/puppetdb'
 
 class PuppetLint::Checks
   def load_data(path, content)
@@ -23,12 +23,14 @@ PuppetLint.new_check(:ghostbuster_files) do
     m = path.match(%r{.*/([^/]+)/files/(.+)$})
     return if m.nil?
 
+    puppetdb = PuppetGhostbuster::PuppetDB.new
+
     module_name, file_name = m.captures
-    return if client.request('resources', [:'=', ['parameter', 'source'], "puppet:///modules/#{module_name}/#{file_name}"],).data.size > 0
+    return if puppetdb.client.request('resources', [:'=', ['parameter', 'source'], "puppet:///modules/#{module_name}/#{file_name}"],).data.size > 0
 
     dir_name = File.dirname(file_name)
     while dir_name != '.' do
-      return if client.request(
+      return if puppetdb.client.request(
         'resources',
         [:'and',
          [:'or',
