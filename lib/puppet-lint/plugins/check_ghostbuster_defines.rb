@@ -2,7 +2,7 @@ require 'puppet-ghostbuster/puppetdb'
 
 PuppetLint.new_check(:ghostbuster_defines) do
   def check
-    return if path.match(%r{.*/([^/]+)/manifests/(.+)$}).nil?
+    return if path.match(%r{^\./(:?[^/]+/){2}?manifests/.+$}).nil?
 
     puppetdb = PuppetGhostbuster::PuppetDB.new
 
