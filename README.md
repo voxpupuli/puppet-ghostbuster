@@ -45,5 +45,14 @@ Example output
 
 TODO
 ```
-$ find . | puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_files,ghostbuster_templates
+$ find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_files,ghostbuster_templates {} \+
+modules/foo/manifests/install.pp - WARNING: Class Foo::Install seems unused on line 1
+modules/foo/manifests/service.pp - WARNING: Class Foo::Service seems unused on line 1
+modules/foo/manifests/init.pp - WARNING: Class Foo seems unused on line 1
+modules/bar/manifests/baz.pp - WARNING: Define Bar::Baz seems unused on line 1
+modules/modulename/templates/foo.erb - WARNING: Template modulename/foo.erb seems unused on line 1
+modules/modulename/templates/bar.erb - WARNING: Template modulename/bar.erb seems unused on line 1
+modules/modulename/templates/baz.erb - WARNING: Template modulename/baz.erb seems unused on line 1
+modules/foo/files/bar.txt - WARNING: File foo/bar.txt seems unused on line 1
+modules/foo/files/baz.txt - WARNING: File foo/baz.txt seems unused on line 1
 ```
