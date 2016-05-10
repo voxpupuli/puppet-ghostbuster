@@ -76,19 +76,20 @@ describe 'ghostbuster_files' do
         context 'when file usage is found in manifests' do
 
           before :each do
-            subject.stub(:manifests).and_return(["./manifests/site.pp"])
+            Dir.stub(:glob){["./modules/foo/manifests/bar.pp" ]}
           end
 
           context 'when using full module name syntax' do
             it 'should not detect any problem' do
-              pending 'how to stub :manifests???'
+              expect(File).to receive(:readlines).with("./modules/foo/manifests/bar.pp").and_return(["file{'foo':", "  content => file('foo/bar/baz'),", "  }"])
               expect(problems).to have(0).problems
             end
           end
 
           context 'when using $module_name syntax' do
             it 'should not detect any problem' do
-              pending 'how to stub :manifests???'
+              expect(File).to receive(:readlines).with("./modules/foo/manifests/bar.pp").and_return(["file{'foo':", "  content => file('bar/foo'),", "  }"])
+              expect(File).to receive(:readlines).with("./modules/foo/manifests/bar.pp").and_return(["file{'foo':", '  content => file("${module_name}/bar/baz"),', "  }"])
               expect(problems).to have(0).problems
             end
           end

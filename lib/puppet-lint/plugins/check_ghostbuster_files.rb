@@ -16,7 +16,7 @@ end
 
 PuppetLint.new_check(:ghostbuster_files) do
   def manifests
-    Dir['./**/manifests/**/*.pp']
+    Dir.glob('./**/manifests/**/*.pp')
   end
 
   def check
