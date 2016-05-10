@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.5.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.5.0) (2016-05-10)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.4.5...0.5.0)
+
+**Implemented enhancements:**
+
+- Major Reimplementation. Delivered as puppet-lint plugins.
+
 ## [0.4.5](https://rubygems.org/gems/puppet-ghostbuster/versions/0.4.5) (2016-05-04)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.4.4...0.4.5)
 
