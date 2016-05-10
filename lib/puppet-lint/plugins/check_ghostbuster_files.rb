@@ -1,4 +1,4 @@
-require 'puppetdb'
+require 'puppet-ghostbuster'
 
 class PuppetLint::Checks
   def load_data(path, content)
@@ -15,18 +15,6 @@ class PuppetLint::Checks
 end
 
 PuppetLint.new_check(:ghostbuster_files) do
-
-  def self.client
-    @@client ||= PuppetDB::Client.new({
-      :server => "#{ENV['PUPPETDB_URL'] || 'http://puppetdb:8080'}/pdb/query",
-      :pem    => {
-        'key'     => ENV['PUPPETDB_KEY_FILE'],
-        'cert'    => ENV['PUPPETDB_CERT_FILE'],
-        'ca_file' => ENV['PUPPETDB_CACERT_FILE'],
-      }
-    }, 4)
-  end
-
   def manifests
     Dir['./**/manifests/**/*.pp']
   end
@@ -36,11 +24,11 @@ PuppetLint.new_check(:ghostbuster_files) do
     return if m.nil?
 
     module_name, file_name = m.captures
-    return if self.class.client.request('resources', [:'=', ['parameter', 'source'], "puppet:///modules/#{module_name}/#{file_name}"],).data.size > 0
+    return if client.request('resources', [:'=', ['parameter', 'source'], "puppet:///modules/#{module_name}/#{file_name}"],).data.size > 0
 
     dir_name = File.dirname(file_name)
     while dir_name != '.' do
-      return if self.class.client.request(
+      return if client.request(
         'resources',
         [:'and',
          [:'or',
