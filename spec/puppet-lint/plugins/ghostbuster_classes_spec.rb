@@ -17,7 +17,7 @@ describe 'ghostbuster_classes' do
   context 'with fix disabled' do
 
     before :each do
-      expect(PuppetLint::CheckGhostbusterClasses).to \
+      expect(PuppetGhostbuster::PuppetDB).to \
         receive(:classes).and_return(['Foo'])
     end
 
