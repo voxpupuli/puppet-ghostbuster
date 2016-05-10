@@ -9,7 +9,7 @@ describe 'ghostbuster_templates' do
     context 'when template usage is found in manifests' do
 
       before :each do
-        Dir.stub(:glob){["./modules/foo/manifests/bar.pp" ]}
+        expect(Dir).to receive(:glob){["./modules/foo/manifests/bar.pp" ]}
       end
 
       context 'when using full module name syntax' do
