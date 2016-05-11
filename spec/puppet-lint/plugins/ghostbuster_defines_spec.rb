@@ -10,7 +10,7 @@ describe 'ghostbuster_defines' do
       let(:path) { "./modules/foo/manifests/init.pp" }
 
       it 'should not detect any problem' do
-        expect_puppetdb([:'=', 'type', 'Foo'], [{}])
+        expect_puppetdb_resources([:'=', 'type', 'Foo'], [{}])
         expect(problems).to have(0).problems
       end
     end
@@ -20,7 +20,7 @@ describe 'ghostbuster_defines' do
       let(:path) { "./modules/bar/manifests/init.pp" }
 
       before :each do
-        expect_puppetdb([:'=', 'type', 'Bar'], [])
+        expect_puppetdb_resources([:'=', 'type', 'Bar'], [])
       end
 
       it 'should detect one problem' do
