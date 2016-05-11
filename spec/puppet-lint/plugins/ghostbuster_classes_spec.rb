@@ -1,15 +1,5 @@
 require 'spec_helper'
 
-class PuppetDBRequest
-  def initialize(data)
-    @data = data
-  end
-
-  def data
-    @data
-  end
-end
-
 describe 'ghostbuster_classes' do
   #let(:path) { "./manifests/site.pp" }
   let(:path) { "./modules/foo/manifests/init.pp" }
