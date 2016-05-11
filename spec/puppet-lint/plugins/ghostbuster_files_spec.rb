@@ -11,7 +11,7 @@ describe 'ghostbuster_files' do
       let(:path) { "./modules/foo/files/bar" }
 
       it 'should not detect any problem' do
-        expect_puppetdb(
+        expect_puppetdb_resources(
           [:'=', ['parameter', 'source'], "puppet:///modules/foo/bar"],
           [{}]
         )
@@ -23,10 +23,10 @@ describe 'ghostbuster_files' do
       let(:path) { "./modules/foo/files/bar/baz" }
 
       it 'should not detect any problem' do
-        expect_puppetdb(
+        expect_puppetdb_resources(
           [:'=', ['parameter', 'source'], "puppet:///modules/foo/bar/baz"],
           [])
-        expect_puppetdb(
+        expect_puppetdb_resources(
           [:'and',
              [:'or',
               [:'=', ['parameter', 'source'], "puppet:///modules/foo/bar"],
@@ -43,7 +43,7 @@ describe 'ghostbuster_files' do
       let(:path) { "./modules/foo/files/used_with_file" }
 
       it 'should not detect any problem' do
-        expect_puppetdb(
+        expect_puppetdb_resources(
           [:'=', ['parameter', 'source'], "puppet:///modules/foo/used_with_file"],
           [])
         expect(problems).to have(0).problems
@@ -54,7 +54,7 @@ describe 'ghostbuster_files' do
       let(:path) { "./modules/foo/files/used_with_file_and_module_name" }
 
       it 'should not detect any problem' do
-        expect_puppetdb(
+        expect_puppetdb_resources(
           [:'=', ['parameter', 'source'], "puppet:///modules/foo/used_with_file_and_module_name"],
           [])
         expect(problems).to have(0).problems
@@ -65,7 +65,7 @@ describe 'ghostbuster_files' do
       let(:path) { "./modules/bar/files/foo" }
 
       before :each do
-        expect_puppetdb(
+        expect_puppetdb_resources(
           [:'=', ['parameter', 'source'], "puppet:///modules/bar/foo"],
           [])
       end
@@ -83,10 +83,10 @@ describe 'ghostbuster_files' do
       let(:path) { "./modules/bar/files/foo/bar" }
 
       before :each do
-        expect_puppetdb(
+        expect_puppetdb_resources(
           [:'=', ['parameter', 'source'], "puppet:///modules/bar/foo/bar"],
           [])
-        expect_puppetdb(
+        expect_puppetdb_resources(
           [:'and',
            [:'or',
             [:'=', ['parameter', 'source'], "puppet:///modules/bar/foo"],

@@ -9,7 +9,7 @@ module PuppetGhostbusterSpec
     end
   end
 
-  def expect_puppetdb(request, data)
+  def expect_puppetdb_resources(request, data)
     expect_any_instance_of(PuppetDB::Client).to \
       receive(:request).with('resources', request)
     .and_return(PuppetDBRequest.new(data))
