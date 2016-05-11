@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.5.1](https://rubygems.org/gems/puppet-ghostbuster/versions/0.5.1) (2016-05-11)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.5.0...0.5.1)
+
+**Fixed bugs:**
+
+- Detect templates included in templates
+
 ## [0.5.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.5.0) (2016-05-10)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.4.5...0.5.0)
 
