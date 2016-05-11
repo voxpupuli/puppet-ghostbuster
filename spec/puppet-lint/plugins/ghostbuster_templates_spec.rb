@@ -21,6 +21,14 @@ describe 'ghostbuster_templates' do
       end
     end
 
+    context 'when using template in template' do
+      let(:path) { "./modules/foo/templates/used_in_template.erb" }
+
+      it 'should not detect any problem' do
+        expect(problems).to have(0).problems
+      end
+    end
+
     context 'when template usage is not found in manifests' do
       let(:path) { "./modules/foo/templates/unused" }
 
