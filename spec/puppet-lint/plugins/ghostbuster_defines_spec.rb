@@ -11,35 +11,28 @@ class PuppetDBRequest
 end
 
 describe 'ghostbuster_defines' do
-  let(:path) { "./modules/foo/manifests/init.pp" }
 
   context 'with fix disabled' do
 
     context 'when define is used' do
       let(:code) { "define foo {}" }
-
-      before :each do
-        expect_any_instance_of(PuppetDB::Client).to \
-          receive(:request).with('resources', [:'=', 'type', 'Foo'])
-          .and_return(PuppetDBRequest.new([
-        {
-          'type' => 'Foo',
-          'title' => 'bar',
-        },
-        ]))
-      end
+      let(:path) { "./modules/foo/manifests/init.pp" }
 
       it 'should not detect any problem' do
+        expect_any_instance_of(PuppetDB::Client).to \
+          receive(:request).with('resources', [:'=', 'type', 'Foo'])
+          .and_return(PuppetDBRequest.new([{}]))
         expect(problems).to have(0).problems
       end
     end
 
     context 'when define is not used' do
-      let(:code) { "define foo {}" }
+      let(:code) { "define bar {}" }
+      let(:path) { "./modules/bar/manifests/init.pp" }
 
       before :each do
         expect_any_instance_of(PuppetDB::Client).to \
-          receive(:request).with('resources', [:'=', 'type', 'Foo'])
+          receive(:request).with('resources', [:'=', 'type', 'Bar'])
           .and_return(PuppetDBRequest.new([]))
       end
 
@@ -48,7 +41,7 @@ describe 'ghostbuster_defines' do
       end
 
       it 'should create a warning' do
-        expect(problems).to contain_warning('Define Foo seems unused')
+        expect(problems).to contain_warning('Define Bar seems unused')
       end
     end
   end
