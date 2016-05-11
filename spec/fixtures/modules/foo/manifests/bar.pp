@@ -11,4 +11,7 @@ class foo::bar {
   file { 'used_with_template_and_module_name':
     content => template("${module_name}/used_with_template_and_module_name"),
   }
+  if $::bar {
+    $foo = "Hello ${::foo}"
+  }
 }
