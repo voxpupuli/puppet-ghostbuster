@@ -17,6 +17,10 @@ PuppetLint.new_check(:ghostbuster_templates) do
     Dir.glob('./**/manifests/**/*.pp')
   end
 
+  def templates
+    Dir.glob('./**/templates/**/*').select{ |f| File.file? f }
+  end
+
   def check
     m = path.match(%r{.*/([^/]+)/templates/(.+)$})
     return if m.nil?
@@ -30,6 +34,10 @@ PuppetLint.new_check(:ghostbuster_templates) do
           return if File.readlines(manifest).grep(/["']\$\{module_name\}\/#{template_name}["']/).size > 0
         end
       end
+    end
+
+    templates.each do |template|
+      return if File.readlines(template).grep(%r{scope.function_template\(\['#{module_name}/#{template_name}'\]\)}).size > 0
     end
 
     notify :warning, {
