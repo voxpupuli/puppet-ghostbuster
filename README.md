@@ -18,11 +18,15 @@ Usage
 -----
 
 ```shell
-$ find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_files,ghostbuster_templates {} \+
+$ find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_files,ghostbuster_hiera_files,ghostbuster_templates {} \+
 ```
 
 Environment variables
 ---------------------
+
+### HIERA_YAML_PATH
+
+The location of the `hiera.yaml` file. Defaults to `/etc/puppetlabs/code/hiera.yaml`
 
 ### PUPPETDB_URL
 
@@ -40,12 +44,35 @@ An SSL certificate signed by your site’s Puppet CA
 
 The private key for that certificate
 
+Plugins
+-------
+
+### ghostbuster_classes
+
+Find unused classes in PuppetDB.
+
+### ghostbuster_defines
+
+Find unused defined types in PuppetDB.
+
+### ghostbuster_files
+
+Find unused files in PuppetDB or in Puppet manifests.
+
+### ghostbuster_hiera_files
+
+Find unused hiera files in PuppetDB.
+
+### ghostbuster_templates
+
+Find unused templates in Puppet manifests.
+
 Example output
 --------------
 
 TODO
 ```
-$ find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_files,ghostbuster_templates {} \+
+$ find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_files,ghostbuster_hiera_files,ghostbuster_templates {} \+
 ./modules/foo/manifests/install.pp - WARNING: Class Foo::Install seems unused on line 1
 ./modules/foo/manifests/service.pp - WARNING: Class Foo::Service seems unused on line 1
 ./modules/foo/manifests/init.pp - WARNING: Class Foo seems unused on line 1
