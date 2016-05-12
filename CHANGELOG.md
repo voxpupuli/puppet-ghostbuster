@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.6.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.6.0) (2016-05-12)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.5.1...0.6.0)
+
+**Implemented enhancements:**
+
+- Detect unused hiera files.
+
 ## [0.5.1](https://rubygems.org/gems/puppet-ghostbuster/versions/0.5.1) (2016-05-11)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.5.0...0.5.1)
 
