@@ -1,0 +1,13 @@
+---
+:backends: yaml
+:yaml:
+  :datadir: "/etc/puppetlabs/code/environments/%{environment}/hieradata"
+:hierarchy:
+  - "nodes/%{::trusted.certname}"
+  - "environment/%{server_facts.environment}"
+  - "virtual/%{facts.is_virtual}"
+  - "domain/%{::domain}"
+  - "common"
+:logger: console
+:merge_behavior: native
+:deep_merge_options: {}
