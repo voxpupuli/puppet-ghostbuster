@@ -1,0 +1,17 @@
+[
+  {
+    "certname": "bar.example.com"
+  },
+  {
+    "certname": "virtual.example.com",
+    "fact": {
+      "is_virtual": "true"
+    }
+  },
+  {
+    "certname": "prod.example.com",
+    "fact": {
+      "environment": "production"
+    }
+  }
+]

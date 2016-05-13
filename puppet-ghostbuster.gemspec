@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-its', '~> 1.0'
   s.add_development_dependency 'rspec-collection_matchers', '~> 1.0'
   s.add_development_dependency 'github_changelog_generator'
+  s.add_development_dependency 'jgrep'
   s.add_runtime_dependency 'json'
   s.add_runtime_dependency 'puppet'
   s.add_dependency         'puppet-lint', '~> 1.0'
