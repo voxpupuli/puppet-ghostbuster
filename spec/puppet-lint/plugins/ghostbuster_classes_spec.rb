@@ -1,15 +1,9 @@
 require 'spec_helper'
 
 describe 'ghostbuster_classes' do
-  #let(:path) { "./manifests/site.pp" }
   let(:path) { "./modules/foo/manifests/init.pp" }
 
   context 'with fix disabled' do
-
-    before :each do
-      expect(PuppetGhostbuster::PuppetDB).to \
-        receive(:classes).and_return(['Foo'])
-    end
 
     context 'when class is used' do
       let(:code) { "class foo {}" }
