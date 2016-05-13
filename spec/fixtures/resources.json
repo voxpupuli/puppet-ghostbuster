@@ -1,0 +1,25 @@
+[
+  {
+    "type": "Foo"
+  },
+  {
+    "type": "Foo::Foo"
+  },
+  {
+    "type": "Class",
+    "title": "Foo"
+  },
+  {
+    "type": "File",
+    "parameter": {
+      "source": "puppet:///modules/foo/bar"
+    }
+  },
+  {
+    "type": "File",
+    "parameter": {
+      "source": "puppet:///modules/foo/baz",
+      "recurse": "true"
+    }
+  }
+]
