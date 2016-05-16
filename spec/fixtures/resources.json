@@ -1,9 +1,6 @@
 [
   {
-    "type": "Foo"
-  },
-  {
-    "type": "Foo::Foo"
+    "type": "Bar::Foo"
   },
   {
     "type": "Class",
@@ -21,5 +18,8 @@
       "source": "puppet:///modules/foo/baz",
       "recurse": "true"
     }
+  },
+  {
+    "type": "Bar"
   }
 ]
