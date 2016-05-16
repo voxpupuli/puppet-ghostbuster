@@ -1,2 +1,4 @@
 <%= scope.function_template(['foo/used_in_template.erb']) -%>
 <%= @baz -%>
+<%= scope.function_baz() -%>
+<%= Puppet::Parser::Functions.function(:quux) -%>
