@@ -18,7 +18,7 @@ Usage
 -----
 
 ```shell
-$ find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_files,ghostbuster_hiera_files,ghostbuster_templates {} \+
+$ find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_facts,ghostbuster_files,ghostbuster_functions,ghostbuster_hiera_files,ghostbuster_templates,ghostbuster_types {} \+
 ```
 
 Environment variables
@@ -55,9 +55,17 @@ Find unused classes in PuppetDB.
 
 Find unused defined types in PuppetDB.
 
+### ghostbuster_facts
+
+Find unused facts in Puppet manifests and templates.
+
 ### ghostbuster_files
 
 Find unused files in PuppetDB or in Puppet manifests.
+
+### ghsotbuster_functions
+
+Find unused functions in Puppet manifests or templates.
 
 ### ghostbuster_hiera_files
 
@@ -66,6 +74,10 @@ Find unused hiera files in PuppetDB.
 ### ghostbuster_templates
 
 Find unused templates in Puppet manifests.
+
+### ghostbuster_types
+
+Find unused types in Puppet manifests.
 
 Example output
 --------------
