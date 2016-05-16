@@ -1,5 +1,13 @@
 # Change Log
 
+## [0.7.1](https://rubygems.org/gems/puppet-ghostbuster/versions/0.7.1) (2016-05-16)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.7.0...0.7.1)
+
+**Implemented enhancements:**
+
+- Add missing documentation.
+- Use PuppetDB instead of manifests to detect unused types.
+
 ## [0.7.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.7.0) (2016-05-16)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.6.0...0.7.0)
 
