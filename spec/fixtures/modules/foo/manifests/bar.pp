@@ -15,4 +15,5 @@ class foo::bar {
     $foo = "Hello ${::foo}"
   }
   $foo = bar('baz')
+  bar { 'bar': }
 }
