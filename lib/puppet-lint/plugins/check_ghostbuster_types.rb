@@ -1,3 +1,5 @@
+require 'puppet-ghostbuster/puppetdb'
+
 PuppetLint.new_check(:ghostbuster_types) do
   def manifests
     Dir.glob('./**/manifests/**/*.pp')
@@ -9,9 +11,8 @@ PuppetLint.new_check(:ghostbuster_types) do
 
     type_name = m.captures[0]
 
-    manifests.each do |manifest|
-      return if File.readlines(manifest).grep(%r{^\s*#{type_name}\s*\{}).size > 0
-    end
+    puppetdb = PuppetGhostbuster::PuppetDB.new
+    return if puppetdb.client.request('resources', [:'=', 'type', type_name.capitalize]).data.size > 0
 
     notify :warning, {
       :message => "Type #{type_name.capitalize} seems unused",
