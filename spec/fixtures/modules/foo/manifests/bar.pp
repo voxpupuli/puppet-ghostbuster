@@ -14,4 +14,5 @@ class foo::bar {
   if $::bar {
     $foo = "Hello ${::foo}"
   }
+  $foo = bar('baz')
 }
