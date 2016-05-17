@@ -1,5 +1,19 @@
 require 'puppet-ghostbuster/puppetdb'
 
+class PuppetLint::Checks
+  def load_data(path, content)
+    lexer = PuppetLint::Lexer.new
+    PuppetLint::Data.path = path
+    begin
+      PuppetLint::Data.manifest_lines = content.split("\n", -1)
+      PuppetLint::Data.tokens = lexer.tokenise(content)
+      PuppetLint::Data.parse_control_comments
+    rescue
+      PuppetLint::Data.tokens = []
+    end
+  end
+end
+
 PuppetLint.new_check(:ghostbuster_defines) do
   def check
     return if path.match(%r{^\./(:?[^/]+/){2}?manifests/.+$}).nil?
