@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.7.2](https://rubygems.org/gems/puppet-ghostbuster/versions/0.7.2) (2016-05-19)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.7.1...0.7.2)
+
+**Fixed bugs:**
+
+- Detect facts used in inline_templates()
+
 ## [0.7.1](https://rubygems.org/gems/puppet-ghostbuster/versions/0.7.1) (2016-05-16)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.7.0...0.7.1)
 
