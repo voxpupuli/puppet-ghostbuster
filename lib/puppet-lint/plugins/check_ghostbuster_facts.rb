@@ -32,6 +32,7 @@ PuppetLint.new_check(:ghostbuster_facts) do
 
       manifests.each do |manifest|
         found = true if File.readlines(manifest).grep(%r{\$\{?::#{fact_name}\}?}).size > 0
+        found = true if File.readlines(manifest).grep(%r{@#{fact_name}}).size > 0
         break if found
       end
 

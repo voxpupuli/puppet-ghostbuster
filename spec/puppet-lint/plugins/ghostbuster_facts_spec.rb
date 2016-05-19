@@ -44,5 +44,13 @@ describe 'ghostbuster_facts' do
         expect(problems).to have(0).problems
       end
     end
+
+    context 'when fact is used in an inline_template' do
+      let(:path) { "./spec/fixtures/modules/foo/lib/facter/quux.rb" }
+
+      it 'should not detect any problem' do
+        expect(problems).to have(0).problems
+      end
+    end
   end
 end
