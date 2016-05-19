@@ -16,4 +16,7 @@ class foo::bar {
   }
   $foo = bar('baz')
   bar { 'bar': }
+  file { 'quux':
+    content => inline_template('<%= @quux %>'),
+  }
 }
