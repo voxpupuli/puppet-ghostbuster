@@ -13,7 +13,8 @@ class PuppetDB::Client
   end
 
   def request(endpoint, query, opts={})
-    ret = JGrep.jgrep(File.read("spec/fixtures/#{endpoint}.json"), puppetdb_to_jgrep(query))
+    jquery = puppetdb_to_jgrep(query)
+    ret = JGrep.jgrep(File.read("spec/fixtures/#{endpoint}.json"), jquery)
     PuppetDB::Response.new(ret, ret.size)
   end
 end
