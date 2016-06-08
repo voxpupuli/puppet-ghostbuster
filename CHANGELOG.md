@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.7.3](https://rubygems.org/gems/puppet-ghostbuster/versions/0.7.3) (2016-06-08)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.7.2...0.7.3)
+
+**Fixed bugs:**
+
+- False positive when fact is boolean
+
 ## [0.7.2](https://rubygems.org/gems/puppet-ghostbuster/versions/0.7.2) (2016-05-19)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.7.1...0.7.2)
 
