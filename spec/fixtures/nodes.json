@@ -5,7 +5,7 @@
   {
     "certname": "virtual.example.com",
     "fact": {
-      "is_virtual": "true"
+      "is_virtual": true
     }
   },
   {

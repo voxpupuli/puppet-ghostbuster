@@ -52,7 +52,14 @@ PuppetLint.new_check(:ghostbuster_hiera_files) do
         if v[0] == 'certname'
           query = [:'=', 'certname', m.captures[0]]
         else
-          query = [:'=', ['fact', v[0]], m.captures[0]]
+          value = if m.captures[0] == 'true'
+                    true
+                  elsif m.captures[0] == 'false'
+                    false
+                  else
+                    m.captures[0]
+                  end
+          query = [:'=', ['fact', v[0]], value]
         end
       end
 
