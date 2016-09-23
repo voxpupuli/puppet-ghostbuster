@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.8.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.8.0) (2016-09-23)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.7.3...0.8.0)
+
+**Implemented enhancements:**
+
+- Supports Puppet-lint 2.0.
+
 ## [0.7.3](https://rubygems.org/gems/puppet-ghostbuster/versions/0.7.3) (2016-06-08)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.7.2...0.7.3)
 
