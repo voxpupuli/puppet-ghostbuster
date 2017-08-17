@@ -24,7 +24,7 @@ PuppetLint.new_check(:ghostbuster_defines) do
       title_token = define_idx[:name_token]
       type = title_token.value.split('::').map(&:capitalize).join('::')
 
-      return if puppetdb.client.request('resources', [:'=', 'type', type]).data.size > 0
+      return if puppetdb.resources.include? type
 
       notify :warning, {
         :message => "Define #{type} seems unused",
