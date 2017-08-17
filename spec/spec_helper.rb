@@ -31,7 +31,6 @@ class PuppetDB::Client
 
       jgrep_query_and_parts = []
       query.split(/\s+and\s+/).each do |q|
-          p "q=#{q}"
           newq = ''
           if q.start_with?('(')
               newq << '('
@@ -52,10 +51,8 @@ class PuppetDB::Client
   def request(endpoint, query, opts={})
     if endpoint == ''
         endpoint, query = pql_to_jgrep(query)
-        puts "pql: #{query}"
     else
         query = puppetdb_to_jgrep(query)
-        puts "puppetdb: #{query}"
     end
     ret = JGrep.jgrep(File.read("spec/fixtures/#{endpoint}.json"), query)
     PuppetDB::Response.new(ret, ret.size)
