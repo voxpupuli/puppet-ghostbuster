@@ -26,7 +26,7 @@ PuppetLint.new_check(:ghostbuster_types) do
     type_name = m.captures[0]
 
     puppetdb = PuppetGhostbuster::PuppetDB.new
-    return if puppetdb.client.request('resources', [:'=', 'type', type_name.capitalize]).data.size > 0
+    return if puppetdb.resources.include? type_name.capitalize
 
     notify :warning, {
       :message => "Type #{type_name.capitalize} seems unused",

@@ -24,5 +24,13 @@ class PuppetGhostbuster
     def classes
       self.class.classes
     end
+
+    def self.resources
+      @@resources ||= client.request('', 'resources[title] { nodes { deactivated is not null } }').data.map { |r| r['title'] }.uniq
+    end
+
+    def resources
+      self.class.resources
+    end
   end
 end
