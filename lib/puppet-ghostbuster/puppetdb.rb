@@ -18,7 +18,7 @@ class PuppetGhostbuster
     end
 
     def self.classes
-      @@classes ||= client.request('resources', [:'=', 'type', 'Class']).data.map { |r| r['title'] }.uniq
+      @@classes ||= client.request('', 'resources[title] { type = "Class" and nodes { deactivated is not null } }').data.map { |r| r['title'] }.uniq
     end
 
     def classes
