@@ -26,20 +26,17 @@ PuppetLint.new_check(:ghostbuster_files) do
     puppetdb = PuppetGhostbuster::PuppetDB.new
 
     module_name, file_name = m.captures
-    return if puppetdb.client.request('resources', [:'=', ['parameter', 'source'], "puppet:///modules/#{module_name}/#{file_name}"],).data.size > 0
+    query = "resources[title] { parameters.source = 'puppet:///modules/#{module_name}/#{file_name}' and nodes { deactivated is not null } }"
+    return if puppetdb.client.request('', query).data.size > 0
 
     dir_name = File.dirname(file_name)
     while dir_name != '.' do
-      return if puppetdb.client.request(
-        'resources',
-        [:'and',
-         [:'or',
-          [:'=', ['parameter', 'source'], "puppet:///modules/#{module_name}/#{dir_name}"],
-          [:'=', ['parameter', 'source'], "puppet:///modules/#{module_name}/#{dir_name}/"],
-      ],
-      [:'=', ['parameter', 'recurse'], true],
-      ],
-      ).data.size > 0
+      query = "resources[title] {
+        (parameters.source = 'puppet:///modules/#{module_name}/#{file_name}'
+         or parameters.source = 'puppet:///modules/#{module_name}/#{file_name}/')
+        and parameters.recurse = true }
+        and nodes { deactivated is not null }"
+      return if puppetdb.client.request('', query).data.size > 0
       dir_name = File.dirname(dir_name)
     end
 
