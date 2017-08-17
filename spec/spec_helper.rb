@@ -26,7 +26,7 @@ class PuppetDB::Client
 
       return endpoint, '' if query == ''
 
-      query.sub!('parameters.', 'parameter.')
+      query.gsub!('parameters.', 'parameter.')
       query.sub!(/\s*=\s*/, '=')
 
       jgrep_query_and_parts = []
