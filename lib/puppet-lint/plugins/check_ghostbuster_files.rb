@@ -32,8 +32,8 @@ PuppetLint.new_check(:ghostbuster_files) do
     dir_name = File.dirname(file_name)
     while dir_name != '.' do
       query = "resources[title] {
-        (parameters.source = 'puppet:///modules/#{module_name}/#{file_name}'
-         or parameters.source = 'puppet:///modules/#{module_name}/#{file_name}/')
+        (parameters.source = 'puppet:///modules/#{module_name}/#{dir_name}'
+         or parameters.source = 'puppet:///modules/#{module_name}/#{dir_name}/')
         and parameters.recurse = true }
         and nodes { deactivated is not null }"
       return if puppetdb.client.request('', query).data.size > 0
