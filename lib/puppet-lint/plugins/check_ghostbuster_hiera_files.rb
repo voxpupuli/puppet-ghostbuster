@@ -63,7 +63,7 @@ PuppetLint.new_check(:ghostbuster_hiera_files) do
         end
       end
 
-      query << [:'=', 'deactivated', nil]
+      query = [:'and', query, [:'=', 'deactivated', nil]]
 
       return if puppetdb.client.request('nodes', query ).data.size > 0
     end
