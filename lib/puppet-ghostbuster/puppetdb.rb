@@ -18,7 +18,7 @@ class PuppetGhostbuster
     end
 
     def self.classes
-      @@classes ||= client.request('', 'resources[title] { type = "Class" and nodes { deactivated is not null } }').data.map { |r| r['title'] }.uniq
+      @@classes ||= client.request('', 'resources[title] { type = "Class" and nodes { deactivated is null } }').data.map { |r| r['title'] }.uniq
     end
 
     def classes
@@ -26,7 +26,7 @@ class PuppetGhostbuster
     end
 
     def self.resources
-      @@resources ||= client.request('', 'resources[type] { nodes { deactivated is not null } }').data.map { |r| r['type'] }.uniq
+      @@resources ||= client.request('', 'resources[type] { nodes { deactivated is null } }').data.map { |r| r['type'] }.uniq
     end
 
     def resources

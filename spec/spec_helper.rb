@@ -22,7 +22,7 @@ class PuppetDB::Client
       endpoint = endpoint_cols.split(/[\s\[]/).first
       query.sub!(/^#{Regexp.quote(endpoint_cols)}\{\s*/, '')
       query.sub!(/\s*}\s*/, '')
-      query.sub!(/(and\s+)?nodes\s*\{\s*deactivated\s+is\s+not\s+null\s*\}/, '')
+      query.sub!(/(and\s+)?nodes\s*\{\s*deactivated\s+is\s+null\s*\}/, '')
 
       return endpoint, '' if query == ''
 
