@@ -4,7 +4,7 @@ class PuppetGhostbuster
   class PuppetDB
     def self.client
       @@client ||= ::PuppetDB::Client.new({
-        :server => "#{ENV['PUPPETDB_URL'] || 'http://puppetdb:8080'}/pdb/query",
+        :server => "#{ENV['PUPPETDB_URL'] || 'http://puppetdb:8080'}",
         :pem    => {
           'key'     => ENV['PUPPETDB_KEY_FILE'],
           'cert'    => ENV['PUPPETDB_CERT_FILE'],
