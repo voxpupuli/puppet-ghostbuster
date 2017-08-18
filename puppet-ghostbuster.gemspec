@@ -25,5 +25,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'json'
   s.add_runtime_dependency 'puppet'
   s.add_dependency         'puppet-lint', '>= 1.0', '< 3.0'
-  s.add_runtime_dependency 'puppetdb-ruby'
+  s.add_runtime_dependency 'puppetdb-ruby', '>= 1.1.1'
 end
