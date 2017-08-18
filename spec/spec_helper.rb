@@ -44,6 +44,7 @@ class PuppetDB::Client
           jgrep_query_and_parts << newq
       end
       jgrep_query = jgrep_query_and_parts.join(" and ")
+      jgrep_query.rstrip!
 
       return endpoint, jgrep_query
   end
