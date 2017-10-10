@@ -63,7 +63,7 @@ Find unused facts in Puppet manifests and templates.
 
 Find unused files in PuppetDB or in Puppet manifests.
 
-### ghsotbuster_functions
+### ghostbuster_functions
 
 Find unused functions in Puppet manifests or templates.
 
