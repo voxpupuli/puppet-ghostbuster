@@ -1,5 +1,6 @@
 require 'puppetdb'
 require 'puppet'
+require 'puppet/util/puppetdb'
 
 class PuppetGhostbuster
   class PuppetDB
