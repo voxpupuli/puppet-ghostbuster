@@ -4,8 +4,9 @@ require 'puppet/util/puppetdb'
 
 class PuppetGhostbuster
   class PuppetDB
+    Puppet.initialize_settings
+
     def self.client
-      Puppet.initialize_settings
       @@client ||= ::PuppetDB::Client.new({
         :server => "#{ENV['PUPPETDB_URL'] || Puppet::Util::Puppetdb.config.server_urls[0]}",
         :pem    => {
