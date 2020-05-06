@@ -11,7 +11,7 @@ class PuppetGhostbuster
         :pem    => {
           'key'     => ENV['PUPPETDB_KEY_FILE'] || Puppet[:hostprivkey],
           'cert'    => ENV['PUPPETDB_CERT_FILE'] || Puppet[:hostcert],
-          'ca_file' => ENV['PUPPETDB_CACERT_FILE'] || Puppet[:cacert],
+          'ca_file' => ENV['PUPPETDB_CACERT_FILE'] || Puppet[:localcacert],
         }
       }, 4)
     end
