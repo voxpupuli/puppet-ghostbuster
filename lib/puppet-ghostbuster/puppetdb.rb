@@ -1,14 +1,18 @@
 require 'puppetdb'
+require 'puppet'
+require 'puppet/util/puppetdb'
 
 class PuppetGhostbuster
   class PuppetDB
+    Puppet.initialize_settings
+
     def self.client
       @@client ||= ::PuppetDB::Client.new({
-        :server => "#{ENV['PUPPETDB_URL'] || 'http://puppetdb:8080'}/pdb/query",
+        :server => "#{ENV['PUPPETDB_URL'] || Puppet::Util::Puppetdb.config.server_urls[0]}",
         :pem    => {
-          'key'     => ENV['PUPPETDB_KEY_FILE'],
-          'cert'    => ENV['PUPPETDB_CERT_FILE'],
-          'ca_file' => ENV['PUPPETDB_CACERT_FILE'],
+          'key'     => ENV['PUPPETDB_KEY_FILE'] || Puppet[:hostprivkey],
+          'cert'    => ENV['PUPPETDB_CERT_FILE'] || Puppet[:hostcert],
+          'ca_file' => ENV['PUPPETDB_CACERT_FILE'] || Puppet[:localcacert],
         }
       }, 4)
     end
@@ -18,11 +22,19 @@ class PuppetGhostbuster
     end
 
     def self.classes
-      @@classes ||= client.request('resources', [:'=', 'type', 'Class']).data.map { |r| r['title'] }.uniq
+      @@classes ||= client.request('', 'resources[title] { type = "Class" and nodes { deactivated is null } }').data.map { |r| r['title'] }.uniq
     end
 
     def classes
       self.class.classes
+    end
+
+    def self.resources
+      @@resources ||= client.request('', 'resources[type] { nodes { deactivated is null } }').data.map { |r| r['type'] }.uniq
+    end
+
+    def resources
+      self.class.resources
     end
   end
 end

@@ -1,5 +1,28 @@
 # Change Log
 
+## [0.9.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.9.0) (2017-08-18)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.8.0...0.9.0)
+
+**Implemented enhancements:**
+
+- Use PQL queries to filter out deactivated nodes
+- Cache known resources
+- Build on Ruby 2.3.1
+
+## [0.8.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.8.0) (2016-09-23)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.7.3...0.8.0)
+
+**Implemented enhancements:**
+
+- Supports Puppet-lint 2.0.
+
+## [0.7.3](https://rubygems.org/gems/puppet-ghostbuster/versions/0.7.3) (2016-06-08)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.7.2...0.7.3)
+
+**Fixed bugs:**
+
+- False positive when fact is boolean
+
 ## [0.7.2](https://rubygems.org/gems/puppet-ghostbuster/versions/0.7.2) (2016-05-19)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.7.1...0.7.2)
 
