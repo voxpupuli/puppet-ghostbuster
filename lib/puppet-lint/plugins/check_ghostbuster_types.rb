@@ -8,7 +8,7 @@ class PuppetLint::Checks
       PuppetLint::Data.manifest_lines = content.split("\n", -1)
       PuppetLint::Data.tokens = lexer.tokenise(content)
       PuppetLint::Data.parse_control_comments
-    rescue
+    rescue StandardError
       PuppetLint::Data.tokens = []
     end
   end
@@ -29,9 +29,9 @@ PuppetLint.new_check(:ghostbuster_types) do
     return if puppetdb.resources.include? type_name.capitalize
 
     notify :warning, {
-      :message => "Type #{type_name.capitalize} seems unused",
-      :line    => 1,
-      :column  => 1,
+      message: "Type #{type_name.capitalize} seems unused",
+      line: 1,
+      column: 1,
     }
   end
 end

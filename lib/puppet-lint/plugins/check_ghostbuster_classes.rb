@@ -8,7 +8,7 @@ class PuppetLint::Checks
       PuppetLint::Data.manifest_lines = content.split("\n", -1)
       PuppetLint::Data.tokens = lexer.tokenise(content)
       PuppetLint::Data.parse_control_comments
-    rescue
+    rescue StandardError
       PuppetLint::Data.tokens = []
     end
   end
@@ -27,9 +27,9 @@ PuppetLint.new_check(:ghostbuster_classes) do
       return if puppetdb.classes.include? title
 
       notify :warning, {
-        :message => "Class #{title} seems unused",
-        :line    => title_token.line,
-        :column  => title_token.column,
+        message: "Class #{title} seems unused",
+        line: title_token.line,
+        column: title_token.column,
       }
     end
   end

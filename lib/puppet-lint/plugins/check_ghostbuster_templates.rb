@@ -6,7 +6,7 @@ class PuppetLint::Checks
       PuppetLint::Data.manifest_lines = content.split("\n", -1)
       PuppetLint::Data.tokens = lexer.tokenise(content)
       PuppetLint::Data.parse_control_comments
-    rescue
+    rescue StandardError
       PuppetLint::Data.tokens = []
     end
   end
@@ -18,7 +18,7 @@ PuppetLint.new_check(:ghostbuster_templates) do
   end
 
   def templates
-    Dir.glob('./**/templates/**/*').select{ |f| File.file? f }
+    Dir.glob('./**/templates/**/*').select { |f| File.file? f }
   end
 
   def check
@@ -29,21 +29,24 @@ PuppetLint.new_check(:ghostbuster_templates) do
 
     manifests.each do |manifest|
       return if File.readlines(manifest).grep(%r{["']#{module_name}/#{template_name}["']}).size > 0
-      if match = manifest.match(%r{.*/([^/]+)/manifests/.+$})
-        if match.captures[0] == module_name
-          return if File.readlines(manifest).grep(/["']\$\{module_name\}\/#{template_name}["']/).size > 0
-        end
+
+      next unless match = manifest.match(%r{.*/([^/]+)/manifests/.+$})
+
+      if match.captures[0] == module_name && (File.readlines(manifest).grep(%r{["']\$\{module_name\}/#{template_name}["']}).size > 0)
+        return
       end
     end
 
     templates.each do |template|
-      return if File.readlines(template).grep(%r{scope.function_template\(\['#{module_name}/#{template_name}'\]\)}).size > 0
+      if File.readlines(template).grep(%r{scope.function_template\(\['#{module_name}/#{template_name}'\]\)}).size > 0
+        return
+      end
     end
 
     notify :warning, {
-      :message => "Template #{module_name}/#{template_name} seems unused",
-      :line    => 1,
-      :column  => 1,
+      message: "Template #{module_name}/#{template_name} seems unused",
+      line: 1,
+      column: 1,
     }
   end
 end
