@@ -95,3 +95,11 @@ $ find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster
 ./modules/foo/files/bar.txt - WARNING: File foo/bar.txt seems unused on line 1
 ./modules/foo/files/baz.txt - WARNING: File foo/baz.txt seems unused on line 1
 ```
+
+## Transfer Notice
+
+This plugin was originally authored by [Camptocamp](http://www.camptocamp.com).
+The maintainer preferred that Puppet Community take ownership of the module for future improvement and maintenance.
+Existing pull requests and issues were transferred over, please fork and continue to contribute here instead of Camptocamp.
+
+Previously: https://github.com/camptocamp/puppet-ghostbuster
