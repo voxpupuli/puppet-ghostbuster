@@ -5,8 +5,8 @@ require "puppet-ghostbuster/version"
 Gem::Specification.new do |s|
   s.name        = "puppet-ghostbuster"
   s.version     = PuppetGhostbuster::VERSION
-  s.authors     = ["Camptocamp"]
-  s.homepage    = "http://github.com/camptocamp/puppet-ghostbuster"
+  s.authors     = ["Camptocamp", 'Vox Pupuli']
+  s.homepage    = "http://github.com/voxpupuli/puppet-ghostbuster"
   s.summary     = "Dead code detector for Puppet"
   s.description = "Try and find dead code in Puppet receipts"
   s.licenses    = 'Apache-2.0'
