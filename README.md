@@ -1,10 +1,12 @@
 puppet-ghostbuster
 ==================
 
-[![Build Status](https://img.shields.io/travis/camptocamp/puppet-ghostbuster.svg)](https://travis-ci.org/camptocamp/puppet-ghostbuster)
-[![Gem Version](https://img.shields.io/gem/v/puppet-ghostbuster.svg)](https://rubygems.org/gems/puppet-ghostbuster)
-[![Gem Downloads](https://img.shields.io/gem/dt/puppet-ghostbuster.svg)](https://rubygems.org/gems/puppet-ghostbuster)
-[![Gemnasium](https://img.shields.io/gemnasium/camptocamp/puppet-ghostbuster.svg)](https://gemnasium.com/camptocamp/puppet-ghostbuster)
+[![License](https://img.shields.io/github/license/voxpupuli/puppet-ghostbuster.svg)](https://github.com/voxpupuli/puppet-ghostbuster/blob/master/LICENSE)
+[![Test](https://github.com/voxpupuli/puppet-ghostbuster/actions/workflows/test.yml/badge.svg)](https://github.com/voxpupuli/puppet-ghostbuster/actions/workflows/test.yml)
+[![Release](https://github.com/voxpupuli/puppet-ghostbuster/actions/workflows/release.yml/badge.svg)](https://github.com/voxpupuli/puppet-ghostbuster/actions/workflows/release.yml)
+[![RubyGem Version](https://img.shields.io/gem/v/puppet-ghostbuster.svg)](https://rubygems.org/gems/puppet-ghostbuster)
+[![RubyGem Downloads](https://img.shields.io/gem/dt/puppet-ghostbuster.svg)](https://rubygems.org/gems/puppet-ghostbuster)
+[![Donated by Camptocamp](https://img.shields.io/badge/donated%20by-camptocamp-fb7047.svg)](#transfer-notice)
 
 When you have dead puppet code hanging around ...
 *Who you gonna call ?*
@@ -95,3 +97,11 @@ $ find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster
 ./modules/foo/files/bar.txt - WARNING: File foo/bar.txt seems unused on line 1
 ./modules/foo/files/baz.txt - WARNING: File foo/baz.txt seems unused on line 1
 ```
+
+## Transfer Notice
+
+This plugin was originally authored by [Camptocamp](http://www.camptocamp.com).
+The maintainer preferred that Puppet Community take ownership of the module for future improvement and maintenance.
+Existing pull requests and issues were transferred over, please fork and continue to contribute here instead of Camptocamp.
+
+Previously: https://github.com/camptocamp/puppet-ghostbuster
