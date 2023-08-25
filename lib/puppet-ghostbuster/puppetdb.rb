@@ -1,14 +1,20 @@
 require 'puppetdb'
 require 'puppet'
-# require 'puppet/util/puppetdb'
 
 class PuppetGhostbuster
   class PuppetDB
     Puppet.initialize_settings
 
+    begin
+      require 'puppet/util/puppetdb'
+      @@puppetdb = Puppet::Util::Puppetdb.config.server_urls[0]
+    rescue LoadError
+      @@puppetdb = "https://#{Puppet[:server]}:8081"
+    end
+
     def self.client
       @@client ||= ::PuppetDB::Client.new({
-                                            server: ENV['PUPPETDB_URL'] || 'http://puppetdb:8080',
+                                            server: ENV['PUPPETDB_URL'] || @@puppetdb,
                                             pem: {
                                               'key' => ENV['PUPPETDB_KEY_FILE'] || Puppet[:hostprivkey],
                                               'cert' => ENV['PUPPETDB_CERT_FILE'] || Puppet[:hostcert],
