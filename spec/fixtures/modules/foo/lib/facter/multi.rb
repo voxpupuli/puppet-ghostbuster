@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Unused facts
 Facter.add('multi1') do
   setcode do
