@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 ENV['HIERA_YAML_PATH'] = './spec/fixtures/hiera.yaml'
