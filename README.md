@@ -46,6 +46,11 @@ An SSL certificate signed by your site’s Puppet CA
 
 The private key for that certificate
 
+### PE_TOKEN
+
+If set, PE token authentication will be used instead of certificate authentication.
+Value may be a token _or_ path to a file containing a token.
+
 Plugins
 -------
 

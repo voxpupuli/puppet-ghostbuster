@@ -13,14 +13,25 @@ class PuppetGhostbuster
     end
 
     def self.client
-      @@client ||= ::PuppetDB::Client.new({
-                                            server: ENV['PUPPETDB_URL'] || @@puppetdb,
-                                            pem: {
-                                              'key' => ENV['PUPPETDB_KEY_FILE'] || Puppet[:hostprivkey],
-                                              'cert' => ENV['PUPPETDB_CERT_FILE'] || Puppet[:hostcert],
-                                              'ca_file' => ENV['PUPPETDB_CACERT_FILE'] || Puppet[:localcacert],
-                                            },
-                                          }, 4)
+      @@client ||= begin
+        options = {
+          server: ENV['PUPPETDB_URL'] || @@puppetdb,
+        }
+
+        if ENV['PE_TOKEN']
+          token_file = File.expand_path(ENV['PE_TOKEN'])
+          options[:token] = File.exist?(token_file) ? File.read(token_file) : ENV.fetch('PE_TOKEN')
+          options[:cacert] = ENV['PUPPETDB_CACERT_FILE'] || Puppet[:localcacert]
+        else
+          options[:pem] = {
+            'key' => ENV['PUPPETDB_KEY_FILE'] || Puppet[:hostprivkey],
+            'cert' => ENV['PUPPETDB_CERT_FILE'] || Puppet[:hostcert],
+            'ca_file' => ENV['PUPPETDB_CACERT_FILE'] || Puppet[:localcacert],
+          }
+        end
+
+        ::PuppetDB::Client.new(options, 4)
+      end
     end
 
     def client
