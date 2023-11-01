@@ -2,11 +2,11 @@
 version: 5
 hierarchy:
   - name: "Per-node data (yaml version)"
-    path: "nodes/%{::trusted.certname}.yaml"
+    path: "nodes/%{trusted.certname}.yaml"
 
   - name: "Other YAML hierarchy levels"
     paths:
       - "environment/%{server_facts.environment}.yaml"
       - "virtual/%{facts.is_virtual}.yaml"
-      - "domain/%{::domain}.yaml"
+      - "domain/%{domain}.yaml"
       - "common.yaml"
