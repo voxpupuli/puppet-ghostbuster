@@ -10,7 +10,7 @@ describe 'ghostbuster_facts' do
       let(:path) { './spec/fixtures/modules/foo/lib/facter/multi.rb' }
 
       it 'detects one problem' do
-        expect(problems).to have(2).problems
+        expect(problems.size).to eq(2)
       end
 
       it 'creates a warning' do
@@ -26,7 +26,7 @@ describe 'ghostbuster_facts' do
       let(:path) { './spec/fixtures/modules/foo/lib/facter/foo.rb' }
 
       it 'does not detect any problem' do
-        expect(problems).to have(0).problems
+        expect(problems.size).to eq(0)
       end
     end
 
@@ -34,7 +34,7 @@ describe 'ghostbuster_facts' do
       let(:path) { './spec/fixtures/modules/foo/lib/facter/bar.rb' }
 
       it 'does not detect any problem' do
-        expect(problems).to have(0).problems
+        expect(problems.size).to eq(0)
       end
     end
 
@@ -42,7 +42,7 @@ describe 'ghostbuster_facts' do
       let(:path) { './spec/fixtures/modules/foo/lib/facter/baz.rb' }
 
       it 'does not detect any problem' do
-        expect(problems).to have(0).problems
+        expect(problems.size).to eq(0)
       end
     end
 
@@ -50,7 +50,7 @@ describe 'ghostbuster_facts' do
       let(:path) { './spec/fixtures/modules/foo/lib/facter/quux.rb' }
 
       it 'does not detect any problem' do
-        expect(problems).to have(0).problems
+        expect(problems.size).to eq(0)
       end
     end
   end

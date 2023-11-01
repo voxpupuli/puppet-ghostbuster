@@ -17,10 +17,12 @@ PuppetLint.new_check(:ghostbuster_hiera_files) do
     hiera_yaml_file = ENV['HIERA_YAML_PATH'] || '/etc/puppetlabs/code/hiera.yaml'
     hiera = YAML.load_file(hiera_yaml_file)
     regs = {}
-    hiera[:hierarchy].each do |hierarchy|
-      regex = hierarchy.gsub(/%\{(::)?(trusted|server_facts|facts)\.[^\}]+\}/, '(.+)').gsub(/%\{[^\}]+\}/, '.+')
-      facts = hierarchy.match(regex).captures.map { |f| f[/%{(::)?(trusted|server_facts|facts)\.(.+)}/, 3] }
-      regs[regex] = facts
+    hiera['hierarchy'].each do |hierarchy|
+      ([*hierarchy['path']] + [*hierarchy['paths']]).each do |level|
+        regex = level.gsub(/%\{(::)?(trusted|server_facts|facts)\.[^\}]+\}/, '(.+)').gsub(/%\{[^\}]+\}/, '.+')
+        facts = level.match(regex).captures.map { |f| f[/%{(::)?(trusted|server_facts|facts)\.(.+)}/, 3] }
+        regs[regex] = facts
+      end
     end
     regs
   end
@@ -32,7 +34,7 @@ PuppetLint.new_check(:ghostbuster_hiera_files) do
     _path = path.gsub('./hieradata/', '')
 
     regexprs.each do |k, v|
-      m = _path.match(Regexp.new("#{k}.yaml"))
+      m = _path.match(Regexp.new("#{k}"))
       next if m.nil?
       return if m.captures.size == 0
 
