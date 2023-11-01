@@ -10,7 +10,7 @@ describe 'ghostbuster_types' do
       let(:path) { './spec/fixtures/modules/foo/lib/puppet/type/foo.rb' }
 
       it 'detects one problem' do
-        expect(problems).to have(1).problems
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -22,7 +22,7 @@ describe 'ghostbuster_types' do
       let(:path) { './spec/fixtures/modules/foo/lib/puppet/type/bar.rb' }
 
       it 'does not detect any problem' do
-        expect(problems).to have(0).problems
+        expect(problems.size).to eq(0)
       end
     end
   end

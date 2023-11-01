@@ -1,13 +1,12 @@
 ---
-:backends: yaml
-:yaml:
-  :datadir: "/etc/puppetlabs/code/environments/%{environment}/hieradata"
-:hierarchy:
-  - "nodes/%{::trusted.certname}"
-  - "environment/%{server_facts.environment}"
-  - "virtual/%{facts.is_virtual}"
-  - "domain/%{::domain}"
-  - "common"
-:logger: console
-:merge_behavior: native
-:deep_merge_options: {}
+version: 5
+hierarchy:
+  - name: "Per-node data (yaml version)"
+    path: "nodes/%{trusted.certname}.yaml"
+
+  - name: "Other YAML hierarchy levels"
+    paths:
+      - "environment/%{server_facts.environment}.yaml"
+      - "virtual/%{facts.is_virtual}.yaml"
+      - "domain/%{domain}.yaml"
+      - "common.yaml"
