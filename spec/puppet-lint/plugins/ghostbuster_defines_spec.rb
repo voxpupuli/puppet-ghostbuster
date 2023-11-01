@@ -9,7 +9,7 @@ describe 'ghostbuster_defines' do
       let(:path) { './modules/foo/manifests/foo.pp' }
 
       it 'detects one problem' do
-        expect(problems).to have(1).problems
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -22,7 +22,7 @@ describe 'ghostbuster_defines' do
       let(:path) { './modules/bar/manifests/foo.pp' }
 
       it 'does not detect any problem' do
-        expect(problems).to have(0).problems
+        expect(problems.size).to eq(0)
       end
     end
   end

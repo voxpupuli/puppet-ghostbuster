@@ -10,7 +10,7 @@ describe 'ghostbuster_templates' do
       let(:path) { './modules/foo/templates/used_with_template' }
 
       it 'does not detect any problem' do
-        expect(problems).to have(0).problems
+        expect(problems.size).to eq(0)
       end
     end
 
@@ -18,7 +18,7 @@ describe 'ghostbuster_templates' do
       let(:path) { './modules/foo/templates/used_with_template_and_module_name' }
 
       it 'does not detect any problem' do
-        expect(problems).to have(0).problems
+        expect(problems.size).to eq(0)
       end
     end
 
@@ -26,7 +26,7 @@ describe 'ghostbuster_templates' do
       let(:path) { './modules/foo/templates/used_in_template.erb' }
 
       it 'does not detect any problem' do
-        expect(problems).to have(0).problems
+        expect(problems.size).to eq(0)
       end
     end
 
@@ -34,7 +34,7 @@ describe 'ghostbuster_templates' do
       let(:path) { './modules/foo/templates/unused' }
 
       it 'detects one problem' do
-        expect(problems).to have(1).problems
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
