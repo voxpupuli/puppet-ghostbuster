@@ -34,7 +34,7 @@ PuppetLint.new_check(:ghostbuster_hiera_files) do
     _path = path.gsub('./hieradata/', '')
 
     regexprs.each do |k, v|
-      m = _path.match(Regexp.new("#{k}"))
+      m = _path.match(Regexp.new(k))
       next if m.nil?
       return if m.captures.size == 0
 
