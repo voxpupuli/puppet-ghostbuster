@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.0.0](https://rubygems.org/gems/puppet-ghostbuster/versions/1.0.0) (2023-07-11)
+[Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.9.0...1.0.0)
+
+**Implemented enhancements:**
+
+- Support hiera v5
+
 ## [0.9.0](https://rubygems.org/gems/puppet-ghostbuster/versions/0.9.0) (2017-08-18)
 [Full Changelog](https://github.com/camptocamp/puppet-ghostbuster/compare/0.8.0...0.9.0)
 
