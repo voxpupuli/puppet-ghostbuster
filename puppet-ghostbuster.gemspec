@@ -12,6 +12,8 @@ Gem::Specification.new do |s|
   s.description = 'Try and find dead code in Puppet receipts'
   s.licenses    = 'Apache-2.0'
 
+  s.required_ruby_version = '>= 2.7'
+
   s.files       = `git ls-files`.split("\n")
   s.executables = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
 
