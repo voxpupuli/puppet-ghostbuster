@@ -6,7 +6,3 @@ inherit_from: .rubocop_todo.yml
 
 inherit_gem:
   voxpupuli-rubocop: rubocop.yml
-
-Naming/FileName:
-  Exclude:
-    - "*.gemspec"
