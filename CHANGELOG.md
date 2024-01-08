@@ -2,7 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/1.0.0) (2023-11-10)
+## [1.1.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/1.1.0) (2024-01-08)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/1.0.0...1.1.0)
+
+Due to problems during the migration from the camptocamp GitHub org to Vox Pupuli we had some issues with the v1.0.0 Release. The tag exists but the release isn't available on rubygems.org.
+
+**Merged pull requests:**
+
+- reorder gems in Gemfile/gemspec [\#78](https://github.com/voxpupuli/puppet-ghostbuster/pull/78) ([bastelfreak](https://github.com/bastelfreak))
+- Set minimal Ruby version to 2.7 [\#77](https://github.com/voxpupuli/puppet-ghostbuster/pull/77) ([bastelfreak](https://github.com/bastelfreak))
+
+## [1.0.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/1.0.0) (2023-11-11)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/0.9.0...1.0.0)
 
@@ -13,7 +24,6 @@ All notable changes to this project will be documented in this file.
 **Closed issues:**
 
 - Can we bump this module to support puppet-lint \> 3? [\#67](https://github.com/voxpupuli/puppet-ghostbuster/issues/67)
-- Transfer to Vox Pupuli? [\#66](https://github.com/voxpupuli/puppet-ghostbuster/issues/66)
 
 **Merged pull requests:**
 
