@@ -1,3 +1,5 @@
+require 'puppet-ghostbuster/util'
+
 class PuppetLint::Checks
   def load_data(path, content)
     lexer = PuppetLint::Lexer.new
@@ -28,12 +30,11 @@ PuppetLint.new_check(:ghostbuster_functions) do
     function_name = m.captures[0]
 
     manifests.each do |manifest|
-      return if File.readlines(manifest).grep(/#{function_name}\(/).size > 0
+      return if PuppetGhostbuster::Util.search_file(manifest, "#{function_name}(")
     end
 
     templates.each do |template|
-      return if File.readlines(template).grep(/scope.function_#{function_name}\(/).size > 0
-      return if File.readlines(template).grep(/Puppet::Parser::Functions.function\(:#{function_name}/).size > 0
+      return if PuppetGhostbuster::Util.search_file(template, /(Puppet::Parser::Functions\.function\(:|scope\.function_)#{function_name}/)
     end
 
     notify :warning, {
