@@ -40,9 +40,9 @@ class PuppetGhostbuster
 
     def self.classes
       @@classes ||= client.request('',
-                                   'resources[title] { type = "Class" and nodes { deactivated is null } }').data.map do |r|
+                                   'resources[title] { type = "Class" and nodes { deactivated is null } group by title }').data.map do |r|
         r['title']
-      end.uniq
+      end
     end
 
     def classes
@@ -50,9 +50,9 @@ class PuppetGhostbuster
     end
 
     def self.resources
-      @@resources ||= client.request('', 'resources[type] { nodes { deactivated is null } }').data.map do |r|
+      @@resources ||= client.request('', 'resources[type] { nodes { deactivated is null } group by type }').data.map do |r|
         r['type']
-      end.uniq
+      end
     end
 
     def resources
