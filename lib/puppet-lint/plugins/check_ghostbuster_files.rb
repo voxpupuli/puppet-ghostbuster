@@ -1,4 +1,5 @@
 require 'puppet-ghostbuster/puppetdb'
+require 'puppet-ghostbuster/util'
 
 class PuppetLint::Checks
   def load_data(path, content)
@@ -42,9 +43,9 @@ PuppetLint.new_check(:ghostbuster_files) do
     end
 
     manifests.each do |manifest|
-      return if File.readlines(manifest).grep(%r{["']#{module_name}/#{file_name}["']}).size > 0
+      return if PuppetGhostbuster::Util.search_file(manifest, %r{["']#{module_name}/#{file_name}["']})
 
-      if (match = manifest.match(%r{.*/([^/]+)/manifests/.+$})) && (match.captures[0] == module_name) && (File.readlines(manifest).grep(%r{["']\$\{module_name\}/#{file_name}["']}).size > 0)
+      if (match = manifest.match(%r{.*/([^/]+)/manifests/.+$})) && (match.captures[0] == module_name) && PuppetGhostbuster::Util.search_file(manifest, %r{["']\$\{module_name\}/#{file_name}["']})
         return
       end
     end

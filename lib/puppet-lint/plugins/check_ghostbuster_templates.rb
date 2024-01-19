@@ -1,3 +1,5 @@
+require 'puppet-ghostbuster/util'
+
 class PuppetLint::Checks
   def load_data(path, content)
     lexer = PuppetLint::Lexer.new
@@ -28,19 +30,17 @@ PuppetLint.new_check(:ghostbuster_templates) do
     module_name, template_name = m.captures
 
     manifests.each do |manifest|
-      return if File.readlines(manifest).grep(%r{["']#{module_name}/#{template_name}["']}).size > 0
+      return if PuppetGhostbuster::Util.search_file(manifest, %r{["']#{module_name}/#{template_name}["']})
 
       next unless match = manifest.match(%r{.*/([^/]+)/manifests/.+$})
 
-      if match.captures[0] == module_name && (File.readlines(manifest).grep(%r{["']\$\{module_name\}/#{template_name}["']}).size > 0)
+      if match.captures[0] == module_name && PuppetGhostbuster::Util.search_file(manifest, %r{["']\$\{module_name\}/#{template_name}["']})
         return
       end
     end
 
     templates.each do |template|
-      if File.readlines(template).grep(%r{scope.function_template\(\['#{module_name}/#{template_name}'\]\)}).size > 0
-        return
-      end
+      return if PuppetGhostbuster::Util.search_file(template, "scope.function_template(['#{module_name}/#{template_name}'])")
     end
 
     notify :warning, {
