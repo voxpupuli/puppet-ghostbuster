@@ -13,13 +13,26 @@ class PuppetLint::Checks
 end
 
 PuppetLint.new_check(:ghostbuster_hiera_files) do
+  def hiera
+    @hiera ||= YAML.load_file(ENV['HIERA_YAML_PATH'] || '/etc/puppetlabs/code/hiera.yaml')
+  end
+
+  def default_datadir
+    hiera.dig('defaults', 'datadir') || 'hieradata'
+  end
+
+  def path_in_datadirs?(path)
+    @data_dirs ||= hiera['hierarchy'].map { |h| (h['datadir'] || default_datadir).chomp('/') }.uniq
+    path.match?(%(./#{Regexp.union(@data_dirs)}/))
+  end
+
   def regexprs
-    hiera_yaml_file = ENV['HIERA_YAML_PATH'] || '/etc/puppetlabs/code/hiera.yaml'
-    hiera = YAML.load_file(hiera_yaml_file)
     regs = {}
     hiera['hierarchy'].each do |hierarchy|
+      path_datadir = Regexp.escape((hierarchy['datadir'] || default_datadir).chomp('/'))
       ([*hierarchy['path']] + [*hierarchy['paths']]).each do |level|
-        regex = level.gsub(/%\{(::)?(trusted|server_facts|facts)\.[^\}]+\}/, '(.+)').gsub(/%\{[^\}]+\}/, '.+')
+        level = File.join(path_datadir, level)
+        regex = Regexp.new(level.gsub(/%\{(::)?(trusted|server_facts|facts)\.[^\}]+\}/, '(.+)').gsub(/%\{[^\}]+\}/, '.+'))
         facts = level.match(regex).captures.map { |f| f[/%{(::)?(trusted|server_facts|facts)\.(.+)}/, 3] }
         regs[regex] = facts
       end
@@ -28,14 +41,14 @@ PuppetLint.new_check(:ghostbuster_hiera_files) do
   end
 
   def check
-    return if path.match(%r{./hieradata/.*\.yaml}).nil?
+    return unless path_in_datadirs? path
 
     puppetdb = PuppetGhostbuster::PuppetDB.new
-    _path = path.gsub('./hieradata/', '')
 
     regexprs.each do |k, v|
-      m = _path.match(Regexp.new(k))
+      m = path.match(k)
       next if m.nil?
+
       return if m.captures.size == 0
 
       if m.captures.size > 1
@@ -68,7 +81,7 @@ PuppetLint.new_check(:ghostbuster_hiera_files) do
     end
 
     notify :warning, {
-      message: "Hiera File #{_path} seems unused",
+      message: "Hiera File #{path} seems unused",
       line: 1,
       column: 1,
     }

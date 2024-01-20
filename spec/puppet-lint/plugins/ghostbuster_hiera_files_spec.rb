@@ -9,19 +9,19 @@ describe 'ghostbuster_hiera_files' do
 
   context 'with fix disabled' do
     context 'when a certname file is NOT used' do
-      let(:path) { './hieradata/nodes/foo.example.com.yaml' }
+      let(:path) { './data/nodes/foo.example.com.yaml' }
 
       it 'detects one problem' do
         expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
-        expect(problems).to contain_warning('Hiera File nodes/foo.example.com.yaml seems unused')
+        expect(problems).to contain_warning("Hiera File #{path} seems unused")
       end
     end
 
     context 'when a certname file is used' do
-      let(:path) { './hieradata/nodes/bar.example.com.yaml' }
+      let(:path) { './data/nodes/bar.example.com.yaml' }
 
       it 'does not detect any problem' do
         expect(problems.size).to eq(0)
@@ -29,19 +29,19 @@ describe 'ghostbuster_hiera_files' do
     end
 
     context 'when an environment file is NOT used' do
-      let(:path) { './hieradata/environment/foo.yaml' }
+      let(:path) { './data/environment/foo.yaml' }
 
       it 'detects one problem' do
         expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
-        expect(problems).to contain_warning('Hiera File environment/foo.yaml seems unused')
+        expect(problems).to contain_warning("Hiera File #{path} seems unused")
       end
     end
 
     context 'when an environment file is used' do
-      let(:path) { './hieradata/environment/production.yaml' }
+      let(:path) { './data/environment/production.yaml' }
 
       it 'does not detect any problem' do
         expect(problems.size).to eq(0)
@@ -49,30 +49,54 @@ describe 'ghostbuster_hiera_files' do
     end
 
     context 'when an fact is NOT used' do
-      let(:path) { './hieradata/virtual/false.yaml' }
+      let(:path) { './data/virtual/false.yaml' }
 
       it 'detects one problem' do
         expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
-        expect(problems).to contain_warning('Hiera File virtual/false.yaml seems unused')
+        expect(problems).to contain_warning("Hiera File #{path} seems unused")
       end
     end
 
     context 'when an fact file is used' do
-      let(:path) { './hieradata/virtual/true.yaml' }
+      let(:path) { './data/virtual/true.yaml' }
 
       it 'does not detect any problem' do
         expect(problems.size).to eq(0)
       end
     end
 
+    context 'when an fact file is used with wrong extension' do
+      let(:path) { './data/virtual/true.eyaml' }
+
+      it 'detects one problem' do
+        expect(problems.size).to eq(1)
+      end
+
+      it 'creates a warning' do
+        expect(problems).to contain_warning("Hiera File #{path} seems unused")
+      end
+    end
+
     context 'when using a variable in hierarchy' do
-      let(:path) { './hieradata/domain/example.com.yaml' }
+      let(:path) { './data/domain/example.com.yaml' }
 
       it 'does not detect any problem' do
         expect(problems.size).to eq(0)
+      end
+    end
+
+    context 'when hierarchy datadir is NOT default and NOT used' do
+      let(:path) { './private/nodes/privates.example.com.eyaml' }
+
+      it 'detects one problem' do
+        expect(problems.size).to eq(1)
+      end
+
+      it 'creates a warning' do
+        expect(problems).to contain_warning("Hiera File #{path} seems unused")
       end
     end
   end
