@@ -1,6 +1,12 @@
 ---
 version: 5
+defaults:
+  datadir: data
 hierarchy:
+  - name: "Some other location"
+    datadir: private/
+    path: "nodes/%{trusted.certname}.eyaml"
+
   - name: "Per-node data (yaml version)"
     path: "nodes/%{trusted.certname}.yaml"
 
