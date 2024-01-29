@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/1.2.0) (2024-01-29)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/1.1.0...1.2.0)
+
+**Implemented enhancements:**
+
+- Support facts by symbol [\#87](https://github.com/voxpupuli/puppet-ghostbuster/pull/87) ([h0tw1r3](https://github.com/h0tw1r3))
+- support for hiera datadir [\#86](https://github.com/voxpupuli/puppet-ghostbuster/pull/86) ([h0tw1r3](https://github.com/h0tw1r3))
+- optimize puppetdb query [\#85](https://github.com/voxpupuli/puppet-ghostbuster/pull/85) ([h0tw1r3](https://github.com/h0tw1r3))
+- optimize search file content [\#84](https://github.com/voxpupuli/puppet-ghostbuster/pull/84) ([h0tw1r3](https://github.com/h0tw1r3))
+- support puppetdb token authentication [\#73](https://github.com/voxpupuli/puppet-ghostbuster/pull/73) ([h0tw1r3](https://github.com/h0tw1r3))
+
+**Fixed bugs:**
+
+- Getting 'ArgumentError: invalid byte sequence in UTF-8' when using ghostbuster\_facts [\#63](https://github.com/voxpupuli/puppet-ghostbuster/issues/63)
+
+**Merged pull requests:**
+
+- Update voxpupuli-rubocop requirement from ~\> 2.3.0 to ~\> 2.4.0 [\#82](https://github.com/voxpupuli/puppet-ghostbuster/pull/82) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update voxpupuli-rubocop requirement from ~\> 2.2.0 to ~\> 2.3.0 [\#81](https://github.com/voxpupuli/puppet-ghostbuster/pull/81) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [1.1.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/1.1.0) (2024-01-08)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/1.0.0...1.1.0)
