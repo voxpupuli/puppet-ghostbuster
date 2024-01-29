@@ -90,6 +90,7 @@ Style/ClassAndModuleChildren:
 Style/ClassVars:
   Exclude:
     - 'lib/puppet-ghostbuster/puppetdb.rb'
+    - 'lib/puppet-ghostbuster/util.rb'
 
 # Offense count: 9
 # Configuration parameters: AllowedConstants.
@@ -98,6 +99,7 @@ Style/Documentation:
     - 'spec/**/*'
     - 'test/**/*'
     - 'lib/puppet-ghostbuster/puppetdb.rb'
+    - 'lib/puppet-ghostbuster/util.rb'
     - 'lib/puppet-lint/plugins/check_ghostbuster_classes.rb'
     - 'lib/puppet-lint/plugins/check_ghostbuster_defines.rb'
     - 'lib/puppet-lint/plugins/check_ghostbuster_facts.rb'
@@ -114,6 +116,7 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Exclude:
     - 'lib/puppet-ghostbuster/puppetdb.rb'
+    - 'lib/puppet-ghostbuster/util.rb'
     - 'lib/puppet-ghostbuster/version.rb'
     - 'lib/puppet-lint/plugins/check_ghostbuster_classes.rb'
     - 'lib/puppet-lint/plugins/check_ghostbuster_defines.rb'
@@ -167,4 +170,4 @@ Style/ZeroLengthPredicate:
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns.
 # URISchemes: http, https
 Layout/LineLength:
-  Max: 189
+  Max: 195

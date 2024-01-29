@@ -53,5 +53,17 @@ describe 'ghostbuster_facts' do
         expect(problems.size).to eq(0)
       end
     end
+
+    context 'when added fact is a symbol and unused' do
+      let(:path) { './spec/fixtures/modules/foo/lib/facter/asym.rb' }
+
+      it 'detects one problem' do
+        expect(problems.size).to eq(1)
+      end
+
+      it 'creates a warning' do
+        expect(problems).to contain_warning('Fact asym seems unused')
+      end
+    end
   end
 end

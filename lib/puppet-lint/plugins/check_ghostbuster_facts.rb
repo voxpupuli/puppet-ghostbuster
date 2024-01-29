@@ -1,3 +1,5 @@
+require 'puppet-ghostbuster/util'
+
 class PuppetLint::Checks
   def load_data(path, content)
     lexer = PuppetLint::Lexer.new
@@ -25,29 +27,30 @@ PuppetLint.new_check(:ghostbuster_facts) do
     m = path.match(%r{.*/([^/]+)/lib/facter/(.+)$})
     return if m.nil?
 
-    File.readlines(path).grep(/Facter.add\(["']([^"']+)["']\)/).each do |line|
-      fact_name = line.match(/Facter.add\(["']([^"']+)["']\)/).captures[0]
+    File.foreach(path) do |line|
+      if line =~ /Facter.add\(["':](?<fact>[^"'\)]+)["']?\)/
+        fact_name = Regexp.last_match(:fact)
 
-      found = false
+        found = false
 
-      manifests.each do |manifest|
-        found = true if File.readlines(manifest).grep(/\$\{?::#{fact_name}\}?/).size > 0
-        found = true if File.readlines(manifest).grep(/@#{fact_name}/).size > 0
-        break if found
+        manifests.each do |manifest|
+          found = true unless PuppetGhostbuster::Util.search_file(manifest, /(\$\{?::#{fact_name}\}?|@#{fact_name})/).nil?
+          break if found
+        end
+
+        templates.each do |template|
+          found = true unless PuppetGhostbuster::Util.search_file(template, /@#{fact_name}/).nil?
+          break if found
+        end
+
+        next if found
+
+        notify :warning, {
+          message: "Fact #{fact_name} seems unused",
+          line: 1,
+          column: 1,
+        }
       end
-
-      templates.each do |template|
-        found = true if File.readlines(template).grep(/@#{fact_name}/).size > 0
-        break if found
-      end
-
-      next if found
-
-      notify :warning, {
-        message: "Fact #{fact_name} seems unused",
-        line: 1,
-        column: 1,
-      }
     end
   end
 end
