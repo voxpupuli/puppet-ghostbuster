@@ -14,7 +14,10 @@ end
 
 PuppetLint.new_check(:ghostbuster_hiera_files) do
   def hiera
-    @hiera ||= YAML.load_file(ENV['HIERA_YAML_PATH'] || '/etc/puppetlabs/code/hiera.yaml')
+    @hiera ||= [ENV.fetch('HIERA_YAML_PATH', nil), '/etc/puppetlabs/code/hiera.yaml'].filter_map do |hiera_file|
+      YAML.load_file(hiera_file) if hiera_file && File.exist?(hiera_file)
+    end
+    @hiera[0]
   end
 
   def default_datadir
@@ -22,6 +25,8 @@ PuppetLint.new_check(:ghostbuster_hiera_files) do
   end
 
   def path_in_datadirs?(path)
+    return false unless hiera
+
     @data_dirs ||= hiera['hierarchy'].map { |h| (h['datadir'] || default_datadir).chomp('/') }.uniq
     path.match?(%(./#{Regexp.union(@data_dirs)}/))
   end

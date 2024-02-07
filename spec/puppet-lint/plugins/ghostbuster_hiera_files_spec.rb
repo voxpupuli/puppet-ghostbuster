@@ -99,5 +99,15 @@ describe 'ghostbuster_hiera_files' do
         expect(problems).to contain_warning("Hiera File #{path} seems unused")
       end
     end
+
+    context 'when no hiera.yaml exists' do
+      let(:path) { './data/nodes/foo.example.com.yaml' }
+
+      it {
+        allow(File).to receive(:exist?).and_return(false)
+        ENV.delete('HIERA_YAML_PATH')
+        expect(problems.size).to eq(0)
+      }
+    end
   end
 end
