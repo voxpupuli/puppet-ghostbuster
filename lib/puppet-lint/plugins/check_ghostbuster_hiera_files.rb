@@ -14,14 +14,14 @@ end
 
 PuppetLint.new_check(:ghostbuster_hiera_files) do
   def hiera
-    @hiera ||= [ENV.fetch('HIERA_YAML_PATH', nil), '/etc/puppetlabs/code/hiera.yaml'].filter_map do |hiera_file|
+    @hiera ||= [ENV.fetch('HIERA_YAML_PATH', nil), '/etc/puppetlabs/puppetlabs/hiera.yaml'].filter_map do |hiera_file|
       YAML.load_file(hiera_file) if hiera_file && File.exist?(hiera_file)
     end
     @hiera[0]
   end
 
   def default_datadir
-    hiera.dig('defaults', 'datadir') || 'hieradata'
+    hiera.dig('defaults', 'datadir') || 'data'
   end
 
   def path_in_datadirs?(path)

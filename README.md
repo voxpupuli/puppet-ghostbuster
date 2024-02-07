@@ -28,7 +28,7 @@ Environment variables
 
 ### HIERA_YAML_PATH
 
-The location of the `hiera.yaml` file. Defaults to `/etc/puppetlabs/code/hiera.yaml`
+The location of the `hiera.yaml` file. Defaults to `/etc/puppetlabs/puppet/hiera.yaml`
 
 ### PUPPETDB_URL
 
