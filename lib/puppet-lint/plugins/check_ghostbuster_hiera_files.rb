@@ -17,7 +17,7 @@ PuppetLint.new_check(:ghostbuster_hiera_files) do
     @hiera ||= if (hiera_file = ENV.fetch('HIERA_YAML_PATH', false))
                  YAML.load_file(hiera_file)
                else
-                 hiera = ['/etc/puppetlabs/puppet/hiera.yaml'].filter_map do |hf|
+                 hiera = ['hiera.yaml', '/etc/puppetlabs/puppet/hiera.yaml'].filter_map do |hf|
                    YAML.load_file(hf) if hf && File.exist?(hf)
                  end
                  hiera[0]
