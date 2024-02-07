@@ -109,5 +109,14 @@ describe 'ghostbuster_hiera_files' do
         expect(problems.size).to eq(0)
       }
     end
+
+    context 'when HIERA_YAML_PATH is set but does not exist' do
+      let(:path) { './data/domain/example.com.yaml' }
+
+      it {
+        ENV['HIERA_YAML_PATH'] = './spec/fixtures/j.yaml'
+        expect { problems }.to raise_error(Errno::ENOENT)
+      }
+    end
   end
 end
