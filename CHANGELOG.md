@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1](https://github.com/voxpupuli/puppet-ghostbuster/tree/1.2.1) (2024-02-09)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/1.2.0...1.2.1)
+
+**Fixed bugs:**
+
+- Fix and improve hiera.yaml selection [\#90](https://github.com/voxpupuli/puppet-ghostbuster/pull/90) ([h0tw1r3](https://github.com/h0tw1r3))
+
 ## [1.2.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/1.2.0) (2024-01-29)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/1.1.0...1.2.0)
