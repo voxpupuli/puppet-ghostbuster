@@ -34,9 +34,7 @@ PuppetLint.new_check(:ghostbuster_templates) do
 
       next unless match = manifest.match(%r{.*/([^/]+)/manifests/.+$})
 
-      if match.captures[0] == module_name && PuppetGhostbuster::Util.search_file(manifest, %r{["']\$\{module_name\}/#{template_name}["']})
-        return
-      end
+      return if match.captures[0] == module_name && PuppetGhostbuster::Util.search_file(manifest, %r{["']\$\{module_name\}/#{template_name}["']})
     end
 
     templates.each do |template|
