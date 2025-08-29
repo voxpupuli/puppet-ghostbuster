@@ -1,0 +1,6 @@
+---
+# Managed by modulesync - DO NOT EDIT
+# https://github.com/voxpupuli/puppet-lint_modulesync_configs
+# https://voxpupuli.org/docs/updating-files-managed-with-modulesync/
+
+modulesync_config_version: '2.0.0'
