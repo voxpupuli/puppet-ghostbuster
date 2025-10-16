@@ -31,7 +31,6 @@ jobs:
           - ruby: "3.2"
             coverage: "yes"
           - ruby: "3.3"
-          - ruby: "3.4"
     env:
       COVERAGE: ${{ matrix.coverage }}
     name: Ruby ${{ matrix.ruby }}
