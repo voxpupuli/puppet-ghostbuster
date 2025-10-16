@@ -2,7 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.2.1](https://github.com/voxpupuli/puppet-ghostbuster/tree/1.2.1) (2024-02-09)
+## [2.0.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/2.0.0) (2025-10-16)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/1.2.1...2.0.0)
+
+**Breaking changes:**
+
+- feat: switch to openvox, adapt new release ci, switch to ruby 3.2 [\#99](https://github.com/voxpupuli/puppet-ghostbuster/pull/99) ([rwaffen](https://github.com/rwaffen))
+
+**Implemented enhancements:**
+
+- Use vcr for unit tests [\#58](https://github.com/voxpupuli/puppet-ghostbuster/issues/58)
+- Plugin to detect unused top scope variables [\#55](https://github.com/voxpupuli/puppet-ghostbuster/issues/55)
+- Plugin to detect unused entries in hiera files [\#47](https://github.com/voxpupuli/puppet-ghostbuster/issues/47)
+
+**Merged pull requests:**
+
+- Bump actions/checkout from 4 to 5 [\#100](https://github.com/voxpupuli/puppet-ghostbuster/pull/100) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update voxpupuli-rubocop requirement from ~\> 2.6.0 to ~\> 2.8.0 [\#96](https://github.com/voxpupuli/puppet-ghostbuster/pull/96) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update voxpupuli-rubocop requirement from ~\> 2.4.0 to ~\> 2.6.0 [\#93](https://github.com/voxpupuli/puppet-ghostbuster/pull/93) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [1.2.1](https://github.com/voxpupuli/puppet-ghostbuster/tree/1.2.1) (2024-03-26)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/1.2.0...1.2.1)
 
