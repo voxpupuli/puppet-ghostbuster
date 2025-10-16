@@ -5,7 +5,7 @@ PuppetLint::Plugins.load_spec_helper
 
 class PuppetDB::Client
   def puppetdb_to_jgrep(query)
-    if query[0] == :and || query[0] == :or
+    if %i[and or].include?(query[0])
       "(#{puppetdb_to_jgrep(query[1])} #{query[0]} #{puppetdb_to_jgrep(query[2])})"
     else
       "#{[query[1]].flatten.join('.')}#{query[0]}#{query[2]}"

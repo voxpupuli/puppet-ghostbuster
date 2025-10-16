@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-its', '~> 1.0'
   s.add_development_dependency 'voxpupuli-rubocop', '~> 5.0'
 
-  s.add_runtime_dependency 'json', '>= 2.0', '< 3.0'
-  s.add_runtime_dependency 'openvox', '>= 8.0', '< 9.0'
-  s.add_runtime_dependency 'puppetdb-ruby', '~> 1.1', '>= 1.1.1'
+  s.add_dependency 'json', '>= 2.0', '< 3.0'
+  s.add_dependency 'openvox', '>= 8.0', '< 9.0'
+  s.add_dependency 'puppetdb-ruby', '~> 1.1', '>= 1.1.1'
 end
