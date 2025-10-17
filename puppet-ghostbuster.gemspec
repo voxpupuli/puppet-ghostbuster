@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake', '>= 13.0.0', '< 14.0.0'
   s.add_development_dependency 'rspec', '~> 3.0'
   s.add_development_dependency 'rspec-collection_matchers', '~> 1.0'
-  s.add_development_dependency 'rspec-its', '~> 1.0'
+  s.add_development_dependency 'rspec-its', '~> 2.0'
   s.add_development_dependency 'voxpupuli-rubocop', '~> 5.0.0'
 
   s.add_dependency 'json', '>= 2.0', '< 3.0'
