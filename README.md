@@ -23,6 +23,8 @@ Usage
 $ find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_facts,ghostbuster_files,ghostbuster_functions,ghostbuster_hiera_files,ghostbuster_templates,ghostbuster_types {} \+
 ```
 
+**the command has to be executed in your environment root, e.g. /etc/puppetlabs/code/environments/production/**
+
 Environment variables
 ---------------------
 
