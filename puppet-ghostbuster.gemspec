@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '~> 3.0'
   s.add_development_dependency 'rspec-collection_matchers', '~> 1.0'
   s.add_development_dependency 'rspec-its', '~> 2.0'
-  s.add_development_dependency 'voxpupuli-rubocop', '~> 5.0.0'
+  s.add_development_dependency 'voxpupuli-rubocop', '~> 5.1.0'
 
   s.add_dependency 'json', '>= 2.0', '< 3.0'
   s.add_dependency 'openvox', '>= 8.0', '< 9.0'
