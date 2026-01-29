@@ -30,5 +30,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'json', '>= 2.0', '< 3.0'
   s.add_dependency 'openvox', '>= 8.0', '< 9.0'
   s.add_dependency 'puppetdb-ruby', '~> 1.1', '>= 1.1.1'
-  s.add_dependency 'syslog', '~> 0.3.0'
+  s.add_dependency 'syslog', '>= 0.3', '< 0.5'
 end
