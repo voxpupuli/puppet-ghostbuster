@@ -2,9 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.0.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/2.0.0) (2025-10-16)
+## [2.1.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/2.1.0) (2026-02-27)
 
-[Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/1.2.1...2.0.0)
+[Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/v2.0.0...2.1.0)
+
+**Merged pull requests:**
+
+- Update syslog requirement from ~\> 0.3.0 to \>= 0.3, \< 0.5 [\#113](https://github.com/voxpupuli/puppet-ghostbuster/pull/113) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update voxpupuli-rubocop requirement from ~\> 5.0.0 to ~\> 5.1.0 [\#110](https://github.com/voxpupuli/puppet-ghostbuster/pull/110) ([dependabot[bot]](https://github.com/apps/dependabot))
+- README.md: Add note about execution directory [\#108](https://github.com/voxpupuli/puppet-ghostbuster/pull/108) ([bastelfreak](https://github.com/bastelfreak))
+- Update rspec-its requirement from ~\> 1.0 to ~\> 2.0 [\#105](https://github.com/voxpupuli/puppet-ghostbuster/pull/105) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.0.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/v2.0.0) (2025-10-16)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/1.2.1...v2.0.0)
 
 **Breaking changes:**
 
@@ -18,7 +29,6 @@ All notable changes to this project will be documented in this file.
 
 **Merged pull requests:**
 
-- Bump actions/checkout from 4 to 5 [\#100](https://github.com/voxpupuli/puppet-ghostbuster/pull/100) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Update voxpupuli-rubocop requirement from ~\> 2.6.0 to ~\> 2.8.0 [\#96](https://github.com/voxpupuli/puppet-ghostbuster/pull/96) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Update voxpupuli-rubocop requirement from ~\> 2.4.0 to ~\> 2.6.0 [\#93](https://github.com/voxpupuli/puppet-ghostbuster/pull/93) ([dependabot[bot]](https://github.com/apps/dependabot))
 
@@ -76,7 +86,6 @@ Due to problems during the migration from the camptocamp GitHub org to Vox Pupul
 
 **Merged pull requests:**
 
-- Bump actions/checkout from 3 to 4 [\#72](https://github.com/voxpupuli/puppet-ghostbuster/pull/72) ([dependabot[bot]](https://github.com/apps/dependabot))
 - added some unsafe rubocop fixes [\#71](https://github.com/voxpupuli/puppet-ghostbuster/pull/71) ([zilchms](https://github.com/zilchms))
 - Update puppet-lint requirement from \>= 1.0, \< 3.0 to \>= 1.0, \< 5.0 [\#70](https://github.com/voxpupuli/puppet-ghostbuster/pull/70) ([dependabot[bot]](https://github.com/apps/dependabot))
 - modulesync 2023-8-23 [\#69](https://github.com/voxpupuli/puppet-ghostbuster/pull/69) ([zilchms](https://github.com/zilchms))
