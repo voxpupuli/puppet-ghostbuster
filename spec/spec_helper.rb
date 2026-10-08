@@ -16,7 +16,7 @@ class PuppetDB::Client
 
   def process_pql_kv(q)
     k, v = q.split(/\s*=\s*/)
-    ".#{k}=#{v}"
+    ".#{k.strip}=#{v.strip}"
   end
 
   def pql_to_jgrep(query)
@@ -34,6 +34,7 @@ class PuppetDB::Client
 
     jgrep_query_and_parts = []
     query.split(/\s+and\s+/).each do |q|
+      q.strip!
       newq = ''
       if q.start_with?('(')
         newq << '('
