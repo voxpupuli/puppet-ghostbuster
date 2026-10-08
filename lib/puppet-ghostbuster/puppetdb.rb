@@ -12,9 +12,7 @@ class PuppetGhostbuster
       Puppet::Util::Puppetdb.config.server_urls[0]
     rescue LoadError
       server = Puppet[:server]
-      if server.nil? || server.empty?
-        raise ArgumentError, 'Set PUPPETDB_URL or configure server in puppet.conf to connect to PuppetDB'
-      end
+      raise ArgumentError, 'Set PUPPETDB_URL or configure server in puppet.conf to connect to PuppetDB' if server.nil? || server.empty?
 
       "https://#{server}:8081"
     end

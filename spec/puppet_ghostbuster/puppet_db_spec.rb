@@ -5,7 +5,7 @@ require 'spec_helper'
 describe PuppetGhostbuster::PuppetDB do
   describe '.server_url' do
     around do |example|
-      original_url = ENV['PUPPETDB_URL']
+      original_url = ENV.fetch('PUPPETDB_URL', nil)
       ENV.delete('PUPPETDB_URL')
       example.run
     ensure
@@ -18,13 +18,14 @@ describe PuppetGhostbuster::PuppetDB do
 
     it 'uses the explicit URL without loading the PuppetDB integration' do
       ENV['PUPPETDB_URL'] = 'https://database.example.com:8081'
-      expect(described_class).not_to receive(:require)
+      allow(described_class).to receive(:require)
       expect(described_class.server_url).to eq('https://database.example.com:8081')
+      expect(described_class).not_to have_received(:require)
     end
 
     it 'uses the first URL from the PuppetDB integration' do
-      config = double('config', server_urls: ['https://database.example.com:8081'])
-      integration = double('integration', config: config)
+      config = Struct.new(:server_urls).new(['https://database.example.com:8081'])
+      integration = Struct.new(:config).new(config)
       stub_const('Puppet::Util::Puppetdb', integration)
       allow(described_class).to receive(:require).with('puppet/util/puppetdb')
       expect(described_class.server_url).to eq('https://database.example.com:8081')
