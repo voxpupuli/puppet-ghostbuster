@@ -1,6 +1,8 @@
 require 'puppet-lint'
 require 'jgrep'
 
+ENV['PUPPETDB_URL'] ||= 'https://puppetdb.example.com:8081'
+
 PuppetLint::Plugins.load_spec_helper
 
 class PuppetDB::Client

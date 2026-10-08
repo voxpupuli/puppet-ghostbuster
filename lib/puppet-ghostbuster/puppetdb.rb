@@ -5,17 +5,22 @@ class PuppetGhostbuster
   class PuppetDB
     Puppet.initialize_settings
 
-    begin
+    def self.server_url
+      return ENV['PUPPETDB_URL'] if ENV['PUPPETDB_URL'] && !ENV['PUPPETDB_URL'].empty?
+
       require 'puppet/util/puppetdb'
-      @@puppetdb = Puppet::Util::Puppetdb.config.server_urls[0]
+      Puppet::Util::Puppetdb.config.server_urls[0]
     rescue LoadError
-      @@puppetdb = "https://#{Puppet[:server]}:8081"
+      server = Puppet[:server]
+      raise ArgumentError, 'Set PUPPETDB_URL or configure server in puppet.conf to connect to PuppetDB' if server.nil? || server.empty?
+
+      "https://#{server}:8081"
     end
 
     def self.client
       @@client ||= begin
         options = {
-          server: ENV['PUPPETDB_URL'] || @@puppetdb,
+          server: server_url,
         }
 
         if ENV['PE_TOKEN']
