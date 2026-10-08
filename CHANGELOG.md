@@ -2,9 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.1.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/2.1.0) (2026-02-27)
+## [2.2.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/2.2.0) (2026-10-08)
 
-[Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/v2.0.0...2.1.0)
+[Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/v2.1.0...2.2.0)
+
+**Implemented enhancements:**
+
+- feat: make it work with openvox9 [\#129](https://github.com/voxpupuli/puppet-ghostbuster/pull/129) ([rwaffen](https://github.com/rwaffen))
+
+**Merged pull requests:**
+
+- Update voxpupuli-rubocop requirement from ~\> 5.2.0 to ~\> 5.3.0 [\#126](https://github.com/voxpupuli/puppet-ghostbuster/pull/126) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update json requirement from \>= 2.0, \< 3.0 to \>= 2.0, \< 4.0 [\#124](https://github.com/voxpupuli/puppet-ghostbuster/pull/124) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update github\_changelog\_generator requirement from ~\> 1.16.4 to ~\> 1.18 [\#120](https://github.com/voxpupuli/puppet-ghostbuster/pull/120) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update voxpupuli-rubocop requirement from ~\> 5.1.0 to ~\> 5.2.0 [\#119](https://github.com/voxpupuli/puppet-ghostbuster/pull/119) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.1.0](https://github.com/voxpupuli/puppet-ghostbuster/tree/v2.1.0) (2026-02-27)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-ghostbuster/compare/v2.0.0...v2.1.0)
 
 **Merged pull requests:**
 
