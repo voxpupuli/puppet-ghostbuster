@@ -10,6 +10,9 @@ on:
 env:
   BUNDLE_WITHOUT: release
 
+permissions:
+  contents: read
+
 jobs:
   rubocop_and_matrix:
     runs-on: ubuntu-latest
