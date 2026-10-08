@@ -11,8 +11,10 @@ env:
   BUNDLE_WITHOUT: release
 
 jobs:
-  rubocop:
+  rubocop_and_matrix:
     runs-on: ubuntu-latest
+    outputs:
+      ruby: ${{ steps.ruby.outputs.versions }}
     steps:
       - uses: actions/checkout@v7
       - name: Setup ruby
@@ -22,19 +24,16 @@ jobs:
           bundler-cache: true
       - name: Run rake rubocop
         run: bundle exec rake rubocop
+      - id: ruby
+        uses: voxpupuli/ruby-version@be0467ce7366d206b2e87f5b7a032a030120b7cb # 2.0.0
   test:
     runs-on: ubuntu-latest
+    needs: rubocop_and_matrix
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - ruby: "3.2"
-            coverage: "yes"
-          - ruby: "3.3"
-          - ruby: "3.4"
-          - ruby: "4.0"
-    env:
-      COVERAGE: ${{ matrix.coverage }}
+        ruby: ${{ fromJSON(needs.rubocop_and_matrix.outputs.ruby) }}
+
     name: Ruby ${{ matrix.ruby }}
     steps:
       - uses: actions/checkout@v7
@@ -43,13 +42,16 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
+      - name: Enable coverage
+        if: matrix.ruby == '3.2'
+        run: echo "COVERAGE=yes" >> "$GITHUB_ENV"
       - name: Run tests
         run: bundle exec rake spec
       - name: Verify gem builds
         run: gem build --strict --verbose *.gemspec
   tests:
     needs:
-      - rubocop
+      - rubocop_and_matrix
       - test
     runs-on: ubuntu-latest
     name: Test suite
