@@ -28,7 +28,7 @@ PuppetLint.new_check(:ghostbuster_facts) do
     return if m.nil?
 
     File.foreach(path) do |line|
-      if line =~ /Facter.add\(["':](?<fact>[^"'\)]+)["']?\)/
+      if line =~ /Facter.add\(["':](?<fact>[^"')]+)["']?\)/
         fact_name = Regexp.last_match(:fact)
 
         found = false

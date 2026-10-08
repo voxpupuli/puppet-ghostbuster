@@ -41,7 +41,7 @@ PuppetLint.new_check(:ghostbuster_hiera_files) do
       path_datadir = Regexp.escape((hierarchy['datadir'] || default_datadir).chomp('/'))
       ([*hierarchy['path']] + [*hierarchy['paths']]).each do |level|
         level = File.join(path_datadir, level)
-        regex = Regexp.new(level.gsub(/%\{(::)?(trusted|server_facts|facts)\.[^\}]+\}/, '(.+)').gsub(/%\{[^\}]+\}/, '.+'))
+        regex = Regexp.new(level.gsub(/%\{(::)?(trusted|server_facts|facts)\.[^}]+\}/, '(.+)').gsub(/%\{[^}]+\}/, '.+'))
         facts = level.match(regex).captures.map { |f| f[/%{(::)?(trusted|server_facts|facts)\.(.+)}/, 3] }
         regs[regex] = facts
       end

@@ -16,12 +16,16 @@ This gems helps puppet users to find dead code by displaying unused classes, def
 
 This gems only support PuppetDB APi v4 (PuppetDB 3+)
 
+Supports OpenVox 8 and 9 with Ruby 3.2 or newer.
+
 Usage
 -----
 
 ```shell
 $ find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_facts,ghostbuster_files,ghostbuster_functions,ghostbuster_hiera_files,ghostbuster_templates,ghostbuster_types {} \+
 ```
+
+**the command has to be executed in your environment root, e.g. /etc/puppetlabs/code/environments/production/**
 
 Environment variables
 ---------------------
@@ -32,7 +36,10 @@ The location of the `hiera.yaml` file. Defaults to `./hiera.yaml` or `/etc/puppe
 
 ### PUPPETDB_URL
 
-The url or the PuppetDB. Defaults to `http://puppetdb:8080`
+The URL of PuppetDB.
+If unset, uses the first server URL from `puppetdb.conf` when the PuppetDB integration is available,
+otherwise `https://<server>:8081` using the `server` setting in `puppet.conf`.
+OpenVox 9 has no default `server`, so configure it or set `PUPPETDB_URL` explicitly.
 
 ### PUPPETDB_CACERT_FILE
 
