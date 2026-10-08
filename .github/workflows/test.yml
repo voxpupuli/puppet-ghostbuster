@@ -38,6 +38,8 @@ jobs:
         ruby: ${{ fromJSON(needs.rubocop_and_matrix.outputs.ruby) }}
 
     name: Ruby ${{ matrix.ruby }}
+    env:
+      COVERAGE: ${{ (matrix.ruby == '3.2' || matrix.ruby == '4.0') && 'yes' || 'no' }}
     steps:
       - uses: actions/checkout@v7
       - name: Install Ruby ${{ matrix.ruby }}
@@ -45,9 +47,6 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Enable coverage
-        if: matrix.ruby == '3.2'
-        run: echo "COVERAGE=yes" >> "$GITHUB_ENV"
       - name: Run tests
         run: bundle exec rake spec
       - name: Verify gem builds
